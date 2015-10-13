@@ -1,6 +1,6 @@
 ﻿/*-------------------------------------------------------------------------- 
-puntoGeneral.js
-Funciones js par la página PuntoGeneral.html
+getionPunto.js
+Funciones js par la página GestionPunto.html
 
 ---------------------------------------------------------------------------*/
 var responsiveHelper_dt_basic = undefined;
@@ -25,7 +25,7 @@ function initForm() {
     //
     $('#btnBuscar').click(buscarPuntos());
     $('#btnAlta').click(crearPunto());
-    $('#frmBuscar').submit(function () {
+    $('#frmBuscar').submit(function() {
         return false
     });
     //$('#txtBuscar').keypress(function (e) {
@@ -39,16 +39,16 @@ function initForm() {
     if (puntoId !== '') {
         // cargar la tabla con un único valor que es el que corresponde.
         var data = {
-            id: puntoId
-        }
-        // hay que buscar ese elemento en concreto
+                id: puntoId
+            }
+            // hay que buscar ese elemento en concreto
         $.ajax({
             type: "GET",
             url: myconfig.apiUrl + "/api/puntos/" + puntoId,
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function (data, status) {
+            success: function(data, status) {
                 // hay que mostrarlo en la zona de datos
                 var data2 = [data];
                 loadTablaPuntos(data2);
@@ -61,16 +61,16 @@ function initForm() {
 function initTablaPuntos() {
     tablaCarro = $('#dt_punto').dataTable({
         autoWidth: true,
-        preDrawCallback: function () {
+        preDrawCallback: function() {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_punto'), breakpointDefinition);
             }
         },
-        rowCallback: function (nRow) {
+        rowCallback: function(nRow) {
             responsiveHelper_dt_basic.createExpandIcon(nRow);
         },
-        drawCallback: function (oSettings) {
+        drawCallback: function(oSettings) {
             responsiveHelper_dt_basic.respond();
         },
         language: {
@@ -102,10 +102,9 @@ function initTablaPuntos() {
             data: "gnombre"
         }, {
             data: "puntoId",
-            render: function (data, type, row) {
-                var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deletePunto(" + data + ");' title='Eliminar registro'> <i class='fa fa-trash-o fa-fw'></i> </button>";
+            render: function(data, type, row) {
                 var bt2 = "<button class='btn btn-circle btn-success btn-lg' onclick='editPunto(" + data + ");' title='Editar registro'> <i class='fa fa-edit fa-fw'></i> </button>";
-                var html = "<div class='pull-right'>" + bt1 + " " + bt2 + "</div>";
+                var html = "<div class='pull-right'>" + bt2 + "</div>";
                 return html;
             }
         }]
@@ -116,7 +115,9 @@ function datosOK() {
     //TODO: Incluir en la validación si el certificado figura en el almacén de certificados.
     $('#frmBuscar').validate({
         rules: {
-            txtBuscar: { required: true },
+            txtBuscar: {
+                required: true
+            },
         },
         // Messages for form validation
         messages: {
@@ -125,7 +126,7 @@ function datosOK() {
             }
         },
         // Do not change code below
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             error.insertAfter(element.parent());
         }
     });
@@ -146,7 +147,7 @@ function loadTablaPuntos(data) {
 }
 
 function buscarPuntos() {
-    var mf = function () {
+    var mf = function() {
         if (!datosOK()) {
             return;
         }
@@ -158,7 +159,7 @@ function buscarPuntos() {
             url: myconfig.apiUrl + "/api/puntos/?nombre=" + aBuscar,
             dataType: "json",
             contentType: "application/json",
-            success: function (data, status) {
+            success: function(data, status) {
                 // hay que mostrarlo en la zona de datos
                 loadTablaPuntos(data);
             },
@@ -169,8 +170,8 @@ function buscarPuntos() {
 }
 
 function crearPunto() {
-    var mf = function () {
-        var url = "PuntoControlDetalle.html?PuntoId=0";
+    var mf = function() {
+        var url = "GestionPuntoDetalle.html?PuntoId=0";
         window.open(url, '_self');
     };
     return mf;
@@ -183,7 +184,7 @@ function deletePunto(id) {
         title: "<i class='fa fa-info'></i> Mensaje",
         content: mens,
         buttons: '[Aceptar][Cancelar]'
-    }, function (ButtonPressed) {
+    }, function(ButtonPressed) {
         if (ButtonPressed === "Aceptar") {
             var data = {
                 puntoId: id
@@ -194,7 +195,7 @@ function deletePunto(id) {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (data, status) {
+                success: function(data, status) {
                     var fn = buscarPuntos();
                     fn();
                 },
@@ -210,8 +211,6 @@ function deletePunto(id) {
 function editPunto(id) {
     // hay que abrir la página de detalle de punto
     // pasando en la url ese ID
-    var url = "PuntoControlDetalle.html?PuntoId=" + id;
+    var url = "GestionPuntoDetalle.html?PuntoId=" + id;
     window.open(url, '_self');
 }
-
-

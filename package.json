@@ -18,9 +18,9 @@
   "author": "'Rafael Garcia <'rafa@myariadna.com'>",
   "license": "CC-BY-NC-4.0",
   "bugs": {
-    "url": "https://github.com/rafaelgr/WM500V5/issues"
+    "url": "https://github.com/rafaelgr/sguard/issues"
   },
-  "homepage": "https://github.com/rafaelgr/WM500V5#readme",
+  "homepage": "https://github.com/rafaelgr/sguard#readme",
   "dependencies": {
     "async": "^1.4.2",
     "body-parser": "^1.14.0",
@@ -28,6 +28,6 @@
     "edge": "^4.0.0",
     "express": "^4.13.3",
     "moment": "^2.10.6",
-    "mysql": "^2.9.0"
+    "mysql": "^2.0.0"
   }
 }

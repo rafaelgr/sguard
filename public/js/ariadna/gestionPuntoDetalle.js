@@ -14,7 +14,7 @@ var breakpointDefinition = {
     phone: 480
 };
 
-var rondId = 0;
+var puntId = 0;
 
 function initForm() {
     comprobarLogin();
@@ -34,21 +34,33 @@ function initForm() {
     // inicializar la tabla asociada.
     initTablaPuntos();
 
-    rondId = gup('RondaRealizadaId');
-    if (rondId != 0) {
+    puntId = gup('PuntoId');
+    if (puntId != 0) {
         var data = {
-                rondaId: rondId
+                rondaId: puntId
             }
             // hay que buscar ese elemento en concreto
         $.ajax({
             type: "GET",
-            url: myconfig.apiUrl + "/api/rondas-realizadas/detalle/" + rondId,
+            url: myconfig.apiUrl + "/api/puntos/" + puntId,
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function(data, status) {
                 // hay que mostrarlo en la zona de datos
-                loadData(data);
+                vm.pnombre(data.nombre);
+                $.ajax({
+                    type: "GET",
+                    url: myconfig.apiUrl + "/api/rondas-realizadas/punto-check/" + puntId,
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(data),
+                    success: function(data, status) {
+                        // hay que mostrarlo en la zona de datos
+                        loadTablaPuntos(data);
+                    },
+                    error: errorAjax
+                });
             },
             error: errorAjax
         });
@@ -60,35 +72,15 @@ function initForm() {
 
 function admData() {
     var self = this;
-    self.rondaRealizadaId = ko.observable();
-    self.rondaId = ko.observable();
-    self.vigilanteId = ko.observable();
-    self.fecha = ko.observable();
-    self.hora = ko.observable();
-    self.rnombre = ko.observable();
-    self.vnombre = ko.observable();
-    self.resultado = ko.observable();
-    self.puntos = ko.observableArray([]);
+    self.pnombre = ko.observable();
+    self.checks = ko.observableArray([]);
 }
 
-function loadData(data) {
-    vm.rondaRealizadaId(data.rondaRealizadaId);
-    vm.rondaId(data.rondaId);
-    vm.vigilanteId(data.vigilanteId);
-    vm.rnombre(data.rnombre);
-    vm.vnombre(data.vnombre);
-    vm.fecha(moment(data.fecha).format('DD/MM/YYYY'));
-    vm.hora(data.hora);
-    vm.resultado(data.resultado);
-    vm.puntos(data.puntos);
-    loadTablaPuntos(data.puntos);
-}
 
 
 function initTablaPuntos() {
     tablaCarro = $('#dt_rondapuntos').dataTable({
         autoWidth: true,
-        "order": [[ 0, "desc" ],[ 1, "desc" ]],
         preDrawCallback: function() {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
@@ -102,7 +94,7 @@ function initTablaPuntos() {
             responsiveHelper_dt_basic.respond();
         },
         fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-            if (aData.presultado != 'CORRECTO'){
+            if (aData.presultado != 'CORRECTO') {
                 $(nRow).css('color', 'red')
             }
         },
@@ -128,23 +120,21 @@ function initTablaPuntos() {
         },
         data: dataPuntos,
         columns: [{
-            data: "ordenleido"
-        }, {
-            data: "orden"
-        }, {
-            data: "tagleido"
-        }, {
-            data: "pnombre"
-        }, {
-            data: "pfecha",
+            data: "fecha",
             render: function(data, type, row) {
-                if (!data){return "";}
+                if (!data) {
+                    return "";
+                }
                 return moment(data).format('DD/MM/YYYY');
             }
         }, {
-            data: "phora"
+            data: "hora"
         }, {
-            data: "presultado"
+            data: "vnombre"
+        }, {
+            data: "rnombre"
+        }, {
+            data: "resultado"
         }]
     });
 }
