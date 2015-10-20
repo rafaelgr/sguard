@@ -24,6 +24,7 @@ var grupos_router = require('./lib/grupos/grupos_controller');
 var edificios_router = require('./lib/edificios/edificios_controller');
 var descargas_router = require('./lib/descargas/descargas_controller');
 var informes_router = require('./lib/informes/informes_controller');
+var terminales_router = require('./lib/terminales/terminales_controller');
 
 // read app parameters (host and port for the API)
 var config = require('./config.json');
@@ -85,6 +86,7 @@ app.use('/api/grupos', grupos_router);
 app.use('/api/edificios', edificios_router);
 app.use('/api/descargas', descargas_router);
 app.use('/api/informes', informes_router);
+app.use('/api/terminales', terminales_router);
 
 
 // -- start server
