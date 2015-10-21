@@ -10,3 +10,6 @@ CREATE TABLE `sguard`.`terminales`(
 ALTER TABLE `sguard`.`rondas_realizadas`   
   ADD COLUMN `terminalId` INT(11) NULL AFTER `rondaId`,
   ADD CONSTRAINT `ref_terminal` FOREIGN KEY (`terminalId`) REFERENCES `sguard`.`terminales`(`terminalId`);
+ALTER TABLE `sguard`.`rondas_realizadas`   
+  ADD COLUMN `validada` BOOL NULL AFTER `resultado`,
+  ADD COLUMN `obsvalida` TEXT NULL AFTER `validada`;
