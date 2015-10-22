@@ -26,6 +26,7 @@ function initForm() {
     ko.applyBindings(vm);
     // asignación de eventos al clic
     $("#btnSalir").click(salir());
+    $("#btnAceptar").click(aceptar());
     $("#frmRonda").submit(function() {
         return false;
     });
@@ -69,6 +70,9 @@ function admData() {
     self.vnombre = ko.observable();
     self.resultado = ko.observable();
     self.puntos = ko.observableArray([]);
+    self.validada = ko.observable();
+    self.obsvalida = ko.observable();
+    self.tnombre = ko.observable();
 }
 
 function loadData(data) {
@@ -80,6 +84,9 @@ function loadData(data) {
     vm.fecha(moment(data.fecha).format('DD/MM/YYYY'));
     vm.hora(data.hora);
     vm.resultado(data.resultado);
+    vm.validada(data.validada);
+    vm.obsvalida(data.obsvalida);
+    vm.tnombre(data.tnombre);
     vm.puntos(data.puntos);
     loadTablaPuntos(data.puntos);
 }
@@ -88,7 +95,10 @@ function loadData(data) {
 function initTablaPuntos() {
     tablaCarro = $('#dt_rondapuntos').dataTable({
         autoWidth: true,
-        "order": [[ 0, "desc" ],[ 1, "desc" ]],
+        "order": [
+            [0, "desc"],
+            [1, "desc"]
+        ],
         preDrawCallback: function() {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
@@ -102,7 +112,7 @@ function initTablaPuntos() {
             responsiveHelper_dt_basic.respond();
         },
         fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-            if (aData.presultado != 'CORRECTO'){
+            if (aData.presultado != 'CORRECTO') {
                 $(nRow).css('color', 'red')
             }
         },
@@ -138,7 +148,9 @@ function initTablaPuntos() {
         }, {
             data: "pfecha",
             render: function(data, type, row) {
-                if (!data){return "";}
+                if (!data) {
+                    return "";
+                }
                 return moment(data).format('DD/MM/YYYY');
             }
         }, {
@@ -169,5 +181,36 @@ function salir() {
         var url = "GestionRonda.html";
         window.open(url, '_self');
     }
+    return mf;
+}
+
+
+function aceptar() {
+    var mf = function() {
+        // solo se puede cambiar el check de validación y las observaciones
+        var fecha = moment(vm.fecha(), "DD/MM/YYYY").format('YYYY-MM-DD');
+        var data = {
+            rondaRealizada: {
+                "rondaRealizadaId": rondId,
+                "fecha": fecha,
+                "hora": vm.hora(),
+                "validada": vm.validada(),
+                "obsvalida": vm.obsvalida()
+            }
+        };
+        $.ajax({
+            type: "PUT",
+            url: myconfig.apiUrl + "/api/rondas-realizadas/" + rondId,
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function(data, status) {
+                // Nos volvemos al general
+                var url = "GestionRonda.html?rondaRealizadaId=" + rondId;
+                window.open(url, '_self');
+            },
+            error: errorAjax
+        });
+    };
     return mf;
 }

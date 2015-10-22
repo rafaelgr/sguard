@@ -90,7 +90,7 @@
     <header id="header" style="background-color:#FFFFFF; background-image:none;">
         <!-- #PROJECTS: projects dropdown -->
         <div>
-            <span id="logo"> <img src="img/FalckSCI-logo-web.gif" alt="Falck-SCI"> </span>
+            <span id="logo"> <img src="img/FalckSCI-logo-web.png" alt="Falck-SCI"> </span>
         </div>
         <div>
         </div>
@@ -167,7 +167,7 @@
                             <a href="TerminalGeneral.html">
                                 <i class="fa fa-mobile-phone"></i> Terminales
                             </a>
-                        </li>                        
+                        </li>
                         <li>
                             <a href="VigilanteGeneral.html">
                                 <i class="fa fa-users"></i> Vigilantes
@@ -182,7 +182,7 @@
                             <a href="EdificioGeneral.html">
                                 <i class="fa fa-cube"></i> Edificios
                             </a>
-                        </li>                        
+                        </li>
                         <li>
                             <a href="PuntoControlGeneral.html">
                                 <i class="fa fa-square"></i> Puntos Control
@@ -214,7 +214,7 @@
                             <a href="GestionDescarga.html">
                                 <i class="fa fa-download"></i> Descargas
                             </a>
-                        </li>                        
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -243,7 +243,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>                
+                </li>
                 <li>
                     <a href="#">
                         <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">UTILIDADES TERM.</span>
@@ -413,13 +413,37 @@
                                                     <label class="input">
                                                         <input id="txtResultado" name="txtResultado" type="text" data-bind="value: resultado" />
                                                     </label>
-                                                </section>                                                
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-md-3">
+                                                    <label class="label">Terminal</label>
+                                                    <label class="input">
+                                                        <input id="txtTerminal" name="txtTerminal" type="text" data-bind="value: tnombre" />
+                                                    </label>
+                                                </section>                                            
+                                                <section class="col col-md-3">
+                                                    <label class="label">Validación</label>
+                                                    <label class="checkbox">
+                                                        <input id="chkValidada" name="chkValidada" type="checkbox" data-bind="checked: validada" />
+                                                        <i></i>Ronda validada por administrador
+                                                    </label>
+                                                </section>
+                                                <section class="col col-md-6">
+                                                    <label class="label">Observaciones validación </label>
+                                                    <label class="textarea textarea-resizable">
+                                                        <textarea rows="3" class="custom-scroll" data-bind="value:obsvalida"></textarea>
+                                                    </label>
+                                                </section>
                                             </div>
                                         </fieldset>
                                         <fieldset>
                                             <div class="pull-right">
                                                 <button id="btnSalir" title="Salir sin guardar" class="btn btn-warning btn-circle btn-lg">
                                                     <i class="fa fa-lg fa-sign-out"></i>
+                                                </button>
+                                                <button id="btnAceptar" title="Guardar y salir" class="btn btn-success btn-circle btn-lg">
+                                                    <i class="fa fa-lg fa-check"></i>
                                                 </button>
                                             </div>
                                         </fieldset>

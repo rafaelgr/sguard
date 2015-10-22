@@ -13,3 +13,7 @@ ALTER TABLE `sguard`.`rondas_realizadas`
 ALTER TABLE `sguard`.`rondas_realizadas`   
   ADD COLUMN `validada` BOOL NULL AFTER `resultado`,
   ADD COLUMN `obsvalida` TEXT NULL AFTER `validada`;
+ALTER TABLE `sguard`.`rondas_realizadas`   
+  CHANGE `validada` `validada` TINYINT(1) DEFAULT 0  NULL;
+ALTER TABLE `sguard`.`administradores`   
+  ADD COLUMN `nivel` INT(11) DEFAULT 0  NULL AFTER `email`;
