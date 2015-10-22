@@ -16,10 +16,28 @@ function comprobarLogin() {
     if (!user) {
         window.open('login.html', '_self');
     } else {
+        nivelesUsuario(user.nivel);
         // cargar el nombre en la zona correspondiente
         $('#userName').text(user.nombre);
     }
+}
 
+function nivelesUsuario(nivel) {
+    switch (nivel) {
+        case 0:
+            break;
+        case 1:
+            $('#administradores').hide();
+            $('#terminales').hide();
+            //
+            $('#utilidades').hide();
+            break;
+        case 2:
+            $('#administracion').hide();
+            $('#informes').hide();
+            $('#utilidades').hide();
+            break;
+    }
 }
 
 function comprobarLoginTrabajador() {

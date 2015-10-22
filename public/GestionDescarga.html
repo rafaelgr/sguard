@@ -284,7 +284,7 @@
             <ol class="breadcrumb">
                 <li>Inicio</li>
                 <li>Gestión</li>
-                <li>Rondas realizadas</li>
+                <li>Descargas</li>
             </ol>
             <!-- end breadcrumb -->
             <!-- You can also add more buttons to the
@@ -308,8 +308,8 @@
                     <h1 class="page-title txt-color-blueDark">
 
                             <!-- PAGE HEADER -->
-                            <i class="fa-fw fa fa-sitemap"></i>
-                            Rondas realizadas <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
+                            <i class="fa-fw fa fa-download"></i>
+                            Descargas <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
                         </h1>
                 </div>
                 <!-- end col -->
@@ -362,7 +362,7 @@
                                 -->
                             <header>
                                 <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                <h2>Mantenimiento rondas realizadas</h2>
+                                <h2>Mantenimiento descargas</h2>
                             </header>
                             <!-- widget div-->
                             <div>
@@ -377,12 +377,12 @@
                                     <!-- this is what the user will see -->
                                     <form id="frmBuscar" class="smart-form">
                                         <header>
-                                            Buscar rondas realizadas por nombre de ronda.
+                                            Buscar descargas por numero.
                                         </header>
                                         <fieldset>
                                             <div class="row">
                                                 <section class="col col-md-12">
-                                                    <label class="label">Introduzca el texto a buscar (* = Ver todos)</label>
+                                                    <label class="label">Introduzca el número a buscar (* = Ver todos)</label>
                                                     <label class="input">
                                                         <input id="txtBuscar" name="txtBuscar" type="text" />
                                                     </label>
@@ -394,21 +394,18 @@
                                                 <button id="btnBuscar" title="Buscar" class="btn btn-primary btn-circle btn-lg">
                                                     <i class="fa fa-lg fa-search"></i>
                                                 </button>
-                                                <button id="btnAlta" title="Crear nuevo registro" class="btn btn-success btn-circle btn-lg">
-                                                    <i class="fa fa-lg fa-plus"></i>
-                                                </button>
                                             </div>
                                         </fieldset>
                                     </form>
-                                    <div id="tbRonda" style="display:none;">
-                                        <table id="dt_ronda" class="table table-striped table-bordered table-hover" width="100%">
+                                    <div id="tbDescarga" style="display:none;">
+                                        <table id="dt_descarga" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th data-class="expand">
-                                                        <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Ronda
+                                                        <i class="fa fa-fw fa-download text-muted hidden-md hidden-sm hidden-xs"></i> Numero
                                                     </th>
                                                     <th data-hide="phone">
-                                                        Vigilante
+                                                        Terminal
                                                     </th>
                                                     <th data-hide="phone">
                                                         Fecha
@@ -517,7 +514,7 @@
         <script src="..."></script>-->
     <script src="js/ariadna/comun.js"></script>
     <script src="myconfig.js"></script>
-    <script src="js/ariadna/gestionRonda.js"></script>
+    <script src="js/ariadna/gestionDescarga.js"></script>
     <!-- PAGE RELATED PLUGIN(S) -->
     <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="js/plugin/datatables/dataTables.colVis.min.js"></script>
