@@ -1,6 +1,6 @@
 /*
 SQLyog Community v12.12 (64 bit)
-MySQL - 5.6.16 : Database - sguard
+MySQL - 5.0.27-community-nt : Database - sguard
 *********************************************************************
 */
 
@@ -19,14 +19,14 @@ USE `sguard`;
 DROP TABLE IF EXISTS `administradores`;
 
 CREATE TABLE `administradores` (
-  `administradorId` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(765) DEFAULT NULL,
-  `login` varchar(765) DEFAULT NULL,
-  `password` varchar(765) DEFAULT NULL,
-  `email` varchar(765) DEFAULT NULL,
-  `nivel` int(11) DEFAULT '0',
-  PRIMARY KEY (`administradorId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  `administradorId` int(11) NOT NULL auto_increment,
+  `nombre` varchar(765) default NULL,
+  `login` varchar(765) default NULL,
+  `password` varchar(765) default NULL,
+  `email` varchar(765) default NULL,
+  `nivel` int(11) default '0',
+  PRIMARY KEY  (`administradorId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `administradores` */
 
@@ -37,13 +37,13 @@ insert  into `administradores`(`administradorId`,`nombre`,`login`,`password`,`em
 DROP TABLE IF EXISTS `descargas`;
 
 CREATE TABLE `descargas` (
-  `descargaId` int(11) NOT NULL AUTO_INCREMENT,
-  `nterminal` varchar(255) DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `hora` time DEFAULT NULL,
+  `descargaId` int(11) NOT NULL auto_increment,
+  `nterminal` varchar(255) default NULL,
+  `fecha` date default NULL,
+  `hora` time default NULL,
   `resultado` text,
-  PRIMARY KEY (`descargaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+  PRIMARY KEY  (`descargaId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `descargas` */
 
@@ -54,16 +54,16 @@ insert  into `descargas`(`descargaId`,`nterminal`,`fecha`,`hora`,`resultado`) va
 DROP TABLE IF EXISTS `descargas_lineas`;
 
 CREATE TABLE `descargas_lineas` (
-  `descargaLineaId` int(11) NOT NULL AUTO_INCREMENT,
-  `descargaId` int(11) DEFAULT NULL,
-  `tag` varchar(255) DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `hora` time DEFAULT NULL,
-  `tipo` varchar(255) DEFAULT NULL,
-  `tipoId` int(11) DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`descargaLineaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3552 DEFAULT CHARSET=utf8;
+  `descargaLineaId` int(11) NOT NULL auto_increment,
+  `descargaId` int(11) default NULL,
+  `tag` varchar(255) default NULL,
+  `fecha` date default NULL,
+  `hora` time default NULL,
+  `tipo` varchar(255) default NULL,
+  `tipoId` int(11) default NULL,
+  `nombre` varchar(255) default NULL,
+  PRIMARY KEY  (`descargaLineaId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `descargas_lineas` */
 
@@ -74,13 +74,13 @@ insert  into `descargas_lineas`(`descargaLineaId`,`descargaId`,`tag`,`fecha`,`ho
 DROP TABLE IF EXISTS `edificios`;
 
 CREATE TABLE `edificios` (
-  `edificioId` int(11) NOT NULL AUTO_INCREMENT,
-  `grupoId` int(11) DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`edificioId`),
+  `edificioId` int(11) NOT NULL auto_increment,
+  `grupoId` int(11) default NULL,
+  `nombre` varchar(255) default NULL,
+  PRIMARY KEY  (`edificioId`),
   KEY `ref_grupo` (`grupoId`),
   CONSTRAINT `ref_grupo` FOREIGN KEY (`grupoId`) REFERENCES `grupos` (`grupoId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `edificios` */
 
@@ -91,10 +91,10 @@ insert  into `edificios`(`edificioId`,`grupoId`,`nombre`) values (6,5,'Edificio 
 DROP TABLE IF EXISTS `grupos`;
 
 CREATE TABLE `grupos` (
-  `grupoId` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`grupoId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  `grupoId` int(11) NOT NULL auto_increment,
+  `nombre` varchar(255) default NULL,
+  PRIMARY KEY  (`grupoId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `grupos` */
 
@@ -105,16 +105,16 @@ insert  into `grupos`(`grupoId`,`nombre`) values (5,'GRUPO 1');
 DROP TABLE IF EXISTS `puntos`;
 
 CREATE TABLE `puntos` (
-  `puntoId` int(11) NOT NULL AUTO_INCREMENT,
+  `puntoId` int(11) NOT NULL auto_increment,
   `nombre` varchar(255) NOT NULL,
-  `edificioId` int(11) DEFAULT NULL,
-  `tag` varchar(255) DEFAULT NULL,
-  `cota` varchar(255) DEFAULT NULL,
-  `cubiculo` varchar(255) DEFAULT NULL,
+  `edificioId` int(11) default NULL,
+  `tag` varchar(255) default NULL,
+  `cota` varchar(255) default NULL,
+  `cubiculo` varchar(255) default NULL,
   `observaciones` text,
-  PRIMARY KEY (`puntoId`),
+  PRIMARY KEY  (`puntoId`),
   UNIQUE KEY `idx_tag` (`tag`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `puntos` */
 
@@ -125,12 +125,12 @@ insert  into `puntos`(`puntoId`,`nombre`,`edificioId`,`tag`,`cota`,`cubiculo`,`o
 DROP TABLE IF EXISTS `rondas`;
 
 CREATE TABLE `rondas` (
-  `rondaId` int(11) NOT NULL AUTO_INCREMENT,
+  `rondaId` int(11) NOT NULL auto_increment,
   `nombre` varchar(255) NOT NULL,
-  `tag` varchar(255) DEFAULT NULL,
-  `tagf` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`rondaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  `tag` varchar(255) default NULL,
+  `tagf` varchar(255) default NULL,
+  PRIMARY KEY  (`rondaId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `rondas` */
 
@@ -141,23 +141,23 @@ insert  into `rondas`(`rondaId`,`nombre`,`tag`,`tagf`) values (13,'Ronda 01-02',
 DROP TABLE IF EXISTS `rondas_realizadas`;
 
 CREATE TABLE `rondas_realizadas` (
-  `rondaRealizadaId` int(11) NOT NULL AUTO_INCREMENT,
-  `rondaId` int(11) DEFAULT NULL,
-  `terminalId` int(11) DEFAULT NULL,
-  `vigilanteId` int(11) DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `hora` time DEFAULT NULL,
+  `rondaRealizadaId` int(11) NOT NULL auto_increment,
+  `rondaId` int(11) default NULL,
+  `terminalId` int(11) default NULL,
+  `vigilanteId` int(11) default NULL,
+  `fecha` date default NULL,
+  `hora` time default NULL,
   `resultado` text,
-  `validada` tinyint(1) DEFAULT '0',
+  `validada` tinyint(1) default '0',
   `obsvalida` text,
-  PRIMARY KEY (`rondaRealizadaId`),
+  PRIMARY KEY  (`rondaRealizadaId`),
   KEY `ref_ronda2` (`rondaId`),
   KEY `ref_vigilante` (`vigilanteId`),
   KEY `ref_terminal` (`terminalId`),
   CONSTRAINT `ref_ronda2` FOREIGN KEY (`rondaId`) REFERENCES `rondas` (`rondaId`),
   CONSTRAINT `ref_terminal` FOREIGN KEY (`terminalId`) REFERENCES `terminales` (`terminalId`),
   CONSTRAINT `ref_vigilante` FOREIGN KEY (`vigilanteId`) REFERENCES `vigilantes` (`vigilanteId`)
-) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `rondas_realizadas` */
 
@@ -168,22 +168,22 @@ insert  into `rondas_realizadas`(`rondaRealizadaId`,`rondaId`,`terminalId`,`vigi
 DROP TABLE IF EXISTS `rondas_realizadaspuntos`;
 
 CREATE TABLE `rondas_realizadaspuntos` (
-  `rondaRealizadaPuntoId` int(11) NOT NULL AUTO_INCREMENT,
-  `rondaRealizadaId` int(11) DEFAULT NULL,
-  `orden` int(1) DEFAULT NULL,
-  `puntoId` int(11) DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `hora` time DEFAULT NULL,
-  `tagleido` varchar(255) DEFAULT NULL,
-  `ordenleido` int(11) DEFAULT NULL,
+  `rondaRealizadaPuntoId` int(11) NOT NULL auto_increment,
+  `rondaRealizadaId` int(11) default NULL,
+  `orden` int(1) default NULL,
+  `puntoId` int(11) default NULL,
+  `fecha` date default NULL,
+  `hora` time default NULL,
+  `tagleido` varchar(255) default NULL,
+  `ordenleido` int(11) default NULL,
   `resultado` text,
-  `nombre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`rondaRealizadaPuntoId`),
+  `nombre` varchar(255) default NULL,
+  PRIMARY KEY  (`rondaRealizadaPuntoId`),
   KEY `ref_rondaRealizada` (`rondaRealizadaId`),
   KEY `ref_punto2` (`puntoId`),
   CONSTRAINT `ref_punto2` FOREIGN KEY (`puntoId`) REFERENCES `puntos` (`puntoId`),
   CONSTRAINT `ref_rondaRealizada` FOREIGN KEY (`rondaRealizadaId`) REFERENCES `rondas_realizadas` (`rondaRealizadaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=389 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `rondas_realizadaspuntos` */
 
@@ -194,16 +194,16 @@ insert  into `rondas_realizadaspuntos`(`rondaRealizadaPuntoId`,`rondaRealizadaId
 DROP TABLE IF EXISTS `rondaspuntos`;
 
 CREATE TABLE `rondaspuntos` (
-  `rondaPuntoId` int(11) NOT NULL AUTO_INCREMENT,
-  `orden` int(11) DEFAULT NULL,
-  `rondaId` int(11) DEFAULT NULL,
-  `puntoId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`rondaPuntoId`),
+  `rondaPuntoId` int(11) NOT NULL auto_increment,
+  `orden` int(11) default NULL,
+  `rondaId` int(11) default NULL,
+  `puntoId` int(11) default NULL,
+  PRIMARY KEY  (`rondaPuntoId`),
   KEY `ref_ronda` (`rondaId`),
   KEY `ref_punto` (`puntoId`),
   CONSTRAINT `ref_punto` FOREIGN KEY (`puntoId`) REFERENCES `puntos` (`puntoId`),
   CONSTRAINT `ref_ronda` FOREIGN KEY (`rondaId`) REFERENCES `rondas` (`rondaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `rondaspuntos` */
 
@@ -214,14 +214,14 @@ insert  into `rondaspuntos`(`rondaPuntoId`,`orden`,`rondaId`,`puntoId`) values (
 DROP TABLE IF EXISTS `terminales`;
 
 CREATE TABLE `terminales` (
-  `terminalId` int(11) NOT NULL AUTO_INCREMENT,
-  `numero` varchar(255) DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  `fechaAlta` date DEFAULT NULL,
-  `fechaBaja` date DEFAULT NULL,
+  `terminalId` int(11) NOT NULL auto_increment,
+  `numero` varchar(255) default NULL,
+  `nombre` varchar(255) default NULL,
+  `fechaAlta` date default NULL,
+  `fechaBaja` date default NULL,
   `observaciones` text,
-  PRIMARY KEY (`terminalId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  PRIMARY KEY  (`terminalId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `terminales` */
 
@@ -232,12 +232,12 @@ insert  into `terminales`(`terminalId`,`numero`,`nombre`,`fechaAlta`,`fechaBaja`
 DROP TABLE IF EXISTS `vigilantes`;
 
 CREATE TABLE `vigilantes` (
-  `vigilanteId` int(11) NOT NULL AUTO_INCREMENT,
+  `vigilanteId` int(11) NOT NULL auto_increment,
   `nombre` varchar(255) NOT NULL,
-  `tag` varchar(255) DEFAULT NULL,
-  `tagf` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`vigilanteId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `tag` varchar(255) default NULL,
+  `tagf` varchar(255) default NULL,
+  PRIMARY KEY  (`vigilanteId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `vigilantes` */
 

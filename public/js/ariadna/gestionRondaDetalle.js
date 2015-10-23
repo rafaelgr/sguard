@@ -96,8 +96,7 @@ function initTablaPuntos() {
     tablaCarro = $('#dt_rondapuntos').dataTable({
         autoWidth: true,
         "order": [
-            [0, "desc"],
-            [1, "desc"]
+            [1, "asc"]
         ],
         preDrawCallback: function() {
             // Initialize the responsive datatables helper once.
