@@ -42,6 +42,11 @@ function initForm() {
     };
 
     $.datepicker.setDefaults($.datepicker.regional['es']);
+    $.validator.addMethod("time24", function(value, element) {
+        if (value == "") return true;
+        return /^([01]?[0-9]|2[0-3])(:[0-5][0-9]){2}$/.test(value);
+    }, "Hora errónea.");
+
 
     vm = new admData();
     ko.applyBindings(vm);
@@ -60,6 +65,8 @@ function admData() {
     self.punto = ko.observable();
     self.fechaInicio = ko.observable();
     self.fechaFinal = ko.observable();
+    self.dHora = ko.observable();
+    self.hHora = ko.observable();    
 }
 
 
@@ -77,6 +84,12 @@ function datosOK() {
                 required: true,
                 date: true,
                 greaterThan: "#txtFechaInicio"
+            },
+            txtHoraInicio: {
+                time24: "#txtHoraInicio"
+            },
+            txtHoraFinal: {
+                time24: "#txtHoraFinal"
             }
         },
         // Messages for form validation
@@ -120,9 +133,17 @@ function aceptar() {
             fecha1 = moment(vm.fechaInicio(), "DD/MM/YYYY").format("YYYY-MM-DD");
         if (moment(vm.fechaFinal(), "DD/MM/YYYY").isValid())
             fecha2 = moment(vm.fechaFinal(), "DD/MM/YYYY").format("YYYY-MM-DD");
+        var dHora = "*";
+        var hHora = "*";
+        if (vm.dHora()) {
+            dHora = vm.dHora();
+        }
+        if (vm.hHora()) {
+            hHora = vm.hHora();
+        }        
         $.ajax({
             type: "GET",
-            url: myconfig.apiUrl + "/api/informes/rondas/punto/?puntoId=" + vm.punto().puntoId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2,
+            url: myconfig.apiUrl + "/api/informes/rondas/punto/?puntoId=" + vm.punto().puntoId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora,
             dataType: "json",
             contentType: "application/json",
             success: function(data, status) {

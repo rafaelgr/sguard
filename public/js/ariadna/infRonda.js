@@ -21,6 +21,11 @@ function initForm() {
             }
         }, 'La fecha final debe ser mayor que la inicial.');
 
+    $.validator.addMethod("time24", function(value, element) {
+        if (value == "") return true;
+        return /^([01]?[0-9]|2[0-3])(:[0-5][0-9]){2}$/.test(value);
+    }, "Hora errónea.");
+
 
     $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
@@ -54,6 +59,8 @@ function admData() {
     var self = this;
     self.fechaInicio = ko.observable();
     self.fechaFinal = ko.observable();
+    self.dHora = ko.observable();
+    self.hHora = ko.observable();
 }
 
 
@@ -68,6 +75,12 @@ function datosOK() {
                 required: true,
                 date: true,
                 greaterThan: "#txtFechaInicio"
+            },
+            txtHoraInicio: {
+                time24: "#txtHoraInicio"
+            },
+            txtHoraFinal: {
+                time24: "#txtHoraFinal"
             }
         },
         // Messages for form validation
@@ -102,20 +115,28 @@ function aceptar() {
             fecha1 = moment(vm.fechaInicio(), "DD/MM/YYYY").format("YYYY-MM-DD");
         if (moment(vm.fechaFinal(), "DD/MM/YYYY").isValid())
             fecha2 = moment(vm.fechaFinal(), "DD/MM/YYYY").format("YYYY-MM-DD");
+        var dHora = "*";
+        var hHora = "*";
+        if (vm.dHora()) {
+            dHora = vm.dHora();
+        }
+        if (vm.hHora()) {
+            hHora = vm.hHora();
+        }
         $.ajax({
             type: "GET",
-            url: myconfig.apiUrl + "/api/informes/rondas/?dfecha=" + fecha1 + "&hfecha=" + fecha2,
+            url: myconfig.apiUrl + "/api/informes/rondas/?dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora,
             dataType: "json",
             contentType: "application/json",
-            success: function (data, status) {
+            success: function(data, status) {
                 // hay que mostrarlo en la zona de datos
                 // vm.asignaciones(data);
-                if (data.rondas.length == 0){
-                	mostrarMensajeSmart("No hay rondas con estos criterios");
-                }else{
-                	informePDF(data);
+                if (data.rondas.length == 0) {
+                    mostrarMensajeSmart("No hay rondas con estos criterios");
+                } else {
+                    informePDF(data);
                 }
-                
+
             },
             error: errorAjax
         });
@@ -123,15 +144,17 @@ function aceptar() {
     return mf;
 }
 
-function informePDF(data){
+function informePDF(data) {
     var data = {
-        "template": { "shortid" : "E1XCz-ybg" },
+        "template": {
+            "shortid": "E1XCz-ybg"
+        },
         "data": data
     }
     f_open_post("POST", myconfig.reportUrl + "/api/report", data);
 }
 
-var f_open_post = function (verb, url, data, target) {
+var f_open_post = function(verb, url, data, target) {
     var form = document.createElement("form");
     form.action = url;
     form.method = verb;

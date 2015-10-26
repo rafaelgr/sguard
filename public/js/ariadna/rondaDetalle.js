@@ -293,7 +293,9 @@ function initTablaPuntos() {
         }, {
             data: "rondaPuntoId",
             render: function(data, type, row) {
-                var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deletePuntoRonda(" + data + ");' title='Eliminar registro'> <i class='fa fa-trash-o fa-fw'></i> </button>";
+                var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deletePuntoRonda(";
+                bt1 += data + ", " + row.rondaId + "," + row.orden + ");'";
+                bt1 += " title='Eliminar registro'> <i class='fa fa-trash-o fa-fw'></i> </button>";
                 var html = "<div class='pull-right'>" + bt1 + "</div>";
                 return html;
             }
@@ -315,7 +317,7 @@ function loadTablaPuntos(data) {
     }
 }
 
-function deletePuntoRonda(id) {
+function deletePuntoRonda(id, rondaId, orden) {
     // mensaje de confirmación
     var mens = "¿Realmente desea borrar este registro?";
     $.SmartMessageBox({
@@ -329,7 +331,7 @@ function deletePuntoRonda(id) {
             };
             $.ajax({
                 type: "DELETE",
-                url: myconfig.apiUrl + "/api/rondas/puntos/" + id,
+                url: myconfig.apiUrl + "/api/rondas/puntos/" + id + "/" + rondaId + "/" + orden,
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
@@ -424,31 +426,61 @@ function salir() {
 function agregarPunto() {
     var mf = function() {
         if (!rondaPuntosOk()) return;
-        data = {
-            puntoRonda: {
-                rondaId: rondId,
-                orden: vm.orden(),
-                puntoId: vm.punto().puntoId
-            }
-        };
+        // primero verificamos si ya hay un punto con ese orden
         $.ajax({
-            type: "POST",
-            url: myconfig.apiUrl + "/api/rondas/puntos",
+            type: "GET",
+            url: myconfig.apiUrl + "/api/rondas/puntos/" + rondId + "/" + vm.orden(),
             dataType: "json",
             contentType: "application/json",
-            data: JSON.stringify(data),
             success: function(data, status) {
-                // hay que mostrarlo en la zona de datos
-                // solucion brutal (hay que cambiarla)
-                refrescarTablaPuntos(vm.rondaId());
-                // limpiar los campos
-                vm.orden(null);
+                if (data == null) {
+                    agregarPuntoRonda();
+                } else {
+                    var mens = "Ya existe un punto con el orden " + vm.orden() + ".";
+                    mens += "<br/> ¿Quiere darlo de alta renumerando el " + vm.orden() + " y posteriores?";
+
+                    $.SmartMessageBox({
+                        title: "<i class='fa fa-info'></i> Mensaje",
+                        content: mens,
+                        buttons: '[Aceptar][Cancelar]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Aceptar") {
+                            agregarPuntoRonda();
+                        }
+                    });
+                }
+
             },
             error: errorAjax
         });
     }
     return mf;
 }
+
+agregarPuntoRonda = function() {
+    data = {
+        puntoRonda: {
+            rondaId: rondId,
+            orden: vm.orden(),
+            puntoId: vm.punto().puntoId
+        }
+    };
+    $.ajax({
+        type: "POST",
+        url: myconfig.apiUrl + "/api/rondas/puntos",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function(data, status) {
+            // hay que mostrarlo en la zona de datos
+            // solucion brutal (hay que cambiarla)
+            refrescarTablaPuntos(vm.rondaId());
+            // limpiar los campos
+            vm.orden(null);
+        },
+        error: errorAjax
+    });
+};
 
 function refrescarTablaPuntos(id) {
     $.ajax({

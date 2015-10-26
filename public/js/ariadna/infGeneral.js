@@ -9,7 +9,6 @@ function initForm() {
     $("#frmInforme").submit(function() {
         return false;
     });
-
     $.validator.addMethod("greaterThan",
         function(value, element, params) {
             var fv = moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
@@ -22,6 +21,10 @@ function initForm() {
             }
         }, 'La fecha final debe ser mayor que la inicial.');
 
+    $.validator.addMethod("time24", function(value, element) {
+        if (value == "") return true;
+        return /^([01]?[0-9]|2[0-3])(:[0-5][0-9]){2}$/.test(value);
+    }, "Hora errónea.");
 
     $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
@@ -43,39 +46,37 @@ function initForm() {
 
     $.datepicker.setDefaults($.datepicker.regional['es']);
 
-    $.validator.addMethod("time24", function(value, element) {
-        if (value == "") return true;
-        return /^([01]?[0-9]|2[0-3])(:[0-5][0-9]){2}$/.test(value);
-    }, "Hora errónea.");
-
     vm = new admData();
     ko.applyBindings(vm);
-
-    loadPosiblesTerminales();
-
     // asignación de eventos al clic
     $("#btnAceptar").click(aceptar());
+
+    // cargar combos
+    loadPosiblesRondas();
+    loadPosiblesVigilantes();
+    loadPosiblesTerminales();
 
 }
 
 
 function admData() {
     var self = this;
-    self.posiblesTerminales = ko.observableArray();
-    self.terminal = ko.observable();
     self.fechaInicio = ko.observable();
     self.fechaFinal = ko.observable();
+    self.posiblesRondas = ko.observableArray();
+    self.ronda = ko.observable();
+    self.posiblesVigilantes = ko.observableArray();
+    self.vigilante = ko.observable();
+    self.posiblesTerminales = ko.observableArray();
+    self.terminal = ko.observable();
     self.dHora = ko.observable();
-    self.hHora = ko.observable();    
+    self.hHora = ko.observable();
 }
 
 
 function datosOK() {
     $('#frmInforme').validate({
         rules: {
-            cmbTerminales: {
-                required: true
-            },
             txtFechaInicio: {
                 required: true,
                 date: true
@@ -94,9 +95,6 @@ function datosOK() {
         },
         // Messages for form validation
         messages: {
-            cmbTerminales: {
-                required: "Seleccione un terminal"
-            },
             txtFechaInicio: {
                 required: 'Introduzca una fecha inical',
                 date: 'Debe ser una fecha válida'
@@ -114,12 +112,6 @@ function datosOK() {
     $.validator.methods.date = function(value, element) {
         return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
     }
-    var opciones = $("#frmInforme").validate().settings;
-    if (vm.terminal()) {
-        opciones.rules.cmbTerminales.required = false;
-    } else {
-        opciones.rules.cmbTerminales.required = true;
-    }
     return $('#frmInforme').valid();
 }
 
@@ -133,6 +125,18 @@ function aceptar() {
             fecha1 = moment(vm.fechaInicio(), "DD/MM/YYYY").format("YYYY-MM-DD");
         if (moment(vm.fechaFinal(), "DD/MM/YYYY").isValid())
             fecha2 = moment(vm.fechaFinal(), "DD/MM/YYYY").format("YYYY-MM-DD");
+        var ronda = "*";
+        var vigilante = "*";
+        var terminal = "*";
+        if (vm.ronda()) {
+            ronda = vm.ronda().rondaId;
+        }
+        if (vm.vigilante()) {
+            vigilante = vm.vigilante().vigilanteId;
+        }
+        if (vm.terminal()) {
+            terminal = vm.terminal().terminalId;
+        }
         var dHora = "*";
         var hHora = "*";
         if (vm.dHora()) {
@@ -143,7 +147,7 @@ function aceptar() {
         }        
         $.ajax({
             type: "GET",
-            url: myconfig.apiUrl + "/api/informes/rondas/terminal/?terminalId=" + vm.terminal().terminalId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora,
+            url: myconfig.apiUrl + "/api/informes/rondas/general/?dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&ronda=" + ronda + "&vigilante=" + vigilante + "&terminal=" + terminal + "&dhora=" + dHora + "&hhora=" + hHora,
             dataType: "json",
             contentType: "application/json",
             success: function(data, status) {
@@ -165,7 +169,7 @@ function aceptar() {
 function informePDF(data) {
     var data = {
         "template": {
-            "shortid": "VJJVo6W-l"
+            "shortid": "E1XCz-ybg"
         },
         "data": data
     }
@@ -202,10 +206,38 @@ var f_open_post = function(verb, url, data, target) {
 
 function salir() {
     var mf = function() {
-        var url = "InfTerminalRonda.html";
+        var url = "InfRonda.html";
         window.open(url, '_self');
     }
     return mf;
+}
+
+function loadPosiblesRondas() {
+    $.ajax({
+        type: "GET",
+        url: myconfig.apiUrl + "/api/rondas",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, status) {
+            // hay que mostrarlo en la zona de datos
+            vm.posiblesRondas(data);
+        },
+        error: errorAjax
+    });
+}
+
+function loadPosiblesVigilantes() {
+    $.ajax({
+        type: "GET",
+        url: myconfig.apiUrl + "/api/vigilantes",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, status) {
+            // hay que mostrarlo en la zona de datos
+            vm.posiblesVigilantes(data);
+        },
+        error: errorAjax
+    });
 }
 
 function loadPosiblesTerminales() {
@@ -218,7 +250,6 @@ function loadPosiblesTerminales() {
             // hay que mostrarlo en la zona de datos
             vm.posiblesTerminales(data);
         },
-
         error: errorAjax
     });
 }

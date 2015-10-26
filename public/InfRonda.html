@@ -178,80 +178,85 @@
         <!-- NAVIGATION : This navigation is also responsive-->
         <nav>
             <ul>
-                <li>
+                <li id="inicio">
                     <a href="Index.html" title="Inicio">
                         <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">INICIO</span>
                     </a>
                 </li>
-                <li>
+                <li id="administracion">
                     <a href="#">
                         <i class="fa fa-lg fa-fw fa-bank"></i> <span class="menu-item-parent">ADMINISTRACIÓN</span>
                     </a>
                     <ul>
-                        <li>
+                        <li id="administradores">
                             <a href="AdministradorGeneral.html">
                                 <i class="fa fa-mortar-board"></i> Administradores
                             </a>
                         </li>
-                        <li>
+                        <li id="terminales">
                             <a href="TerminalGeneral.html">
                                 <i class="fa fa-mobile-phone"></i> Terminales
                             </a>
                         </li>
-                        <li>
+                        <li id="vigilantes">
                             <a href="VigilanteGeneral.html">
                                 <i class="fa fa-users"></i> Vigilantes
                             </a>
                         </li>
-                        <li>
+                        <li id="grupos">
                             <a href="GrupoGeneral.html">
                                 <i class="fa fa-cubes"></i> Grupos
                             </a>
                         </li>
-                        <li>
+                        <li id="edificios">
                             <a href="EdificioGeneral.html">
                                 <i class="fa fa-cube"></i> Edificios
                             </a>
                         </li>
-                        <li>
+                        <li id="puntos">
                             <a href="PuntoControlGeneral.html">
                                 <i class="fa fa-square"></i> Puntos Control
                             </a>
                         </li>
-                        <li>
+                        <li id="rondas">
                             <a href="RondaGeneral.html">
                                 <i class="fa fa-sitemap"></i> Rondas
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li id="gestion">
                     <a href="#">
                         <i class="fa fa-lg fa-fw fa-puzzle-piece"></i> <span class="menu-item-parent">GESTION</span>
                     </a>
                     <ul>
-                        <li>
+                        <li id="grondas">
                             <a href="GestionRonda.html">
                                 <i class="fa fa-sitemap"></i> Rondas realizadas.
                             </a>
                         </li>
-                        <li>
+                        <li id="gpuntos">
                             <a href="GestionPunto.html">
                                 <i class="fa fa-square"></i> Puntos controlados
                             </a>
                         </li>
-                        <li>
+                        <li id="gdescargas">
                             <a href="GestionDescarga.html">
                                 <i class="fa fa-download"></i> Descargas
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li id="informes">
                     <a href="#">
                         <i class="fa fa-lg fa-fw fa-file-pdf-o"></i> <span class="menu-item-parent">INFORMES</span>
                     </a>
                     <ul>
+                        <li>
+                            <a href="InfGeneral.html">
+                                <i class="fa fa-file-pdf-o"></i> Informe general
+                            </a>
+                        </li>
                         <li>
                             <a href="InfRonda.html">
                                 <i class="fa fa-file-pdf-o"></i> Rondas general
@@ -274,7 +279,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li id="utilidades">
                     <a href="#">
                         <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">UTILIDADES TERM.</span>
                     </a>
@@ -302,8 +307,7 @@
                     </ul>
                 </li>
             </ul>
-        </nav>
-        <span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+        </nav <span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
     </aside>
     <!-- END NAVIGATION -->
     <!-- MAIN PANEL -->
@@ -410,13 +414,13 @@
                                         </header>
                                         <fieldset>
                                             <div class="row">
-                                                <section class="col col-md-6">
-                                                    <label class="label">Fecha Inicio</label>
+                                                <section class="col col-md-4">
+                                                    <label class="label">Fecha inicio</label>
                                                     <label class="input">
                                                         <input id="txtFechaInicio" name="txtFechaInicio" data-bind="value: fechaInicio" class="datepicker" data-dateformat="dd/mm/yy" />
                                                     </label>
                                                 </section>
-                                                <section class="col col-md-6">
+                                                <section class="col col-md-4">
                                                     <div class="form-group">
                                                         <label class="label">Fecha final</label>
                                                         <label class="input">
@@ -424,6 +428,18 @@
                                                         </label>
                                                     </div>
                                                 </section>
+                                                <section class="col col-md-2">
+                                                    <label class="label">Hora inicio</label>
+                                                    <label class="input">
+                                                        <input id="txtHoraInicio" name="txtHoraInicio" type="text" data-bind="value: dHora" />
+                                                    </label>
+                                                </section>                                                
+                                                <section class="col col-md-2">
+                                                    <label class="label">Hora final</label>
+                                                    <label class="input">
+                                                        <input id="txtHoraFinal" name="txtHoraFinal" type="text" data-bind="value: hHora" />
+                                                    </label>
+                                                </section>                                                
                                             </div>
                                         </fieldset>
                                         <fieldset>
@@ -510,7 +526,6 @@
     <script src="js/moment_locale.js"></script>
     <!--- KNOCKOUT JS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
-
     <script src="myconfig.js"></script>
     <script src="js/ariadna/comun.js"></script>
     <script src="js/ariadna/infRonda.js"></script>
