@@ -15,6 +15,7 @@ var breakpointDefinition = {
 };
 
 var rondId = 0;
+var llamada = "";
 
 function initForm() {
     comprobarLogin();
@@ -36,6 +37,8 @@ function initForm() {
     initTablaPuntos();
 
     rondId = gup('RondaRealizadaId');
+    llamada = gup('llamada');
+
     if (rondId != 0) {
         var data = {
                 rondaId: rondId
@@ -178,6 +181,9 @@ function loadTablaPuntos(data) {
 function salir() {
     var mf = function() {
         var url = "GestionRonda.html";
+        if (llamada == "index") {
+            url = "Index.html";
+        }
         window.open(url, '_self');
     }
     return mf;
@@ -206,6 +212,9 @@ function aceptar() {
             success: function(data, status) {
                 // Nos volvemos al general
                 var url = "GestionRonda.html?rondaRealizadaId=" + rondId;
+                if (llamada == "index") {
+                    url = "Index.html";
+                }
                 window.open(url, '_self');
             },
             error: errorAjax

@@ -31,13 +31,18 @@ function nivelesUsuario(nivel) {
         case 1:
             $('#administradores').hide();
             $('#terminales').hide();
+            $("#txtObsvalida").removeAttr("disabled");
             //
             $('#utilidades').hide();
+            $('#graficos').hide();
+            $('#validaciones').hide();
             break;
         case 2:
             $('#administracion').hide();
             $('#informes').hide();
             $('#utilidades').hide();
+            $('#graficos').hide();
+            $('#validaciones').hide();
             break;
     }
 }
