@@ -167,8 +167,6 @@ CREATE TABLE `rondas_realizadaspuntos` (
 
 /*Data for the table `rondas_realizadaspuntos` */
 
-insert  into `rondas_realizadaspuntos`(`rondaRealizadaPuntoId`,`rondaRealizadaId`,`orden`,`puntoId`,`fecha`,`hora`,`tagleido`,`ordenleido`,`resultado`,`nombre`) values (290,128,1,7,'2015-10-12','20:18:47','0406209033',1,'CORRECTO','Control 3'),(291,128,2,8,'2015-10-12','20:18:50','0403669508',3,'FUERA DE SECUENCIA','Punto Flotante'),(292,128,NULL,NULL,'2015-10-12','20:18:48','0406214305',2,'TAG DESCONOCIDO',NULL),(293,129,1,5,'2015-10-13','13:25:46','0406215258',1,'CORRECTO','Control 1'),(294,129,2,6,'2015-10-13','13:25:47','0406219258',2,'CORRECTO','Control 2'),(295,130,1,5,'2015-10-13','13:26:59','0406215258',1,'CORRECTO','Control 1'),(296,130,2,6,'2015-10-13','13:27:00','0406219258',2,'CORRECTO','Control 2'),(297,131,1,5,NULL,NULL,NULL,NULL,NULL,NULL),(298,131,2,6,'2015-10-13','13:27:57','0406219258',1,'FUERA DE SECUENCIA','Control 2'),(299,132,1,9,'2015-10-13','16:37:27','0403674130',1,'CORRECTO','Punto 1'),(300,132,2,10,'2015-10-13','16:37:29','0406216005',2,'CORRECTO','Punto 2'),(301,132,3,11,'2015-10-13','16:37:31','0403670777',3,'CORRECTO','Punto 3'),(302,133,1,9,'2015-10-13','16:44:20','0403674130',2,'FUERA DE SECUENCIA','Punto 1'),(303,133,2,10,'2015-10-13','16:44:18','0406216005',1,'FUERA DE SECUENCIA','Punto 2'),(304,133,3,11,'2015-10-13','16:44:22','0403670777',3,'CORRECTO','Punto 3'),(305,134,1,9,'2015-10-13','16:51:23','0403674130',1,'CORRECTO','Punto 1'),(306,134,2,10,'2015-10-13','16:51:24','0406216005',2,'CORRECTO','Punto 2'),(307,134,3,11,NULL,NULL,NULL,NULL,NULL,NULL),(308,135,1,9,'2015-10-13','16:51:40','0403674130',1,'CORRECTO','Punto 1'),(309,135,2,10,'2015-10-13','16:51:42','0406216005',2,'CORRECTO','Punto 2'),(310,135,3,11,'2015-10-13','16:51:46','0403670777',3,'CORRECTO','Punto 3'),(311,136,1,9,'2015-10-13','16:54:52','0403674130',3,'FUERA DE SECUENCIA','Punto 1'),(312,136,2,10,'2015-10-13','16:54:44','0406216005',2,'CORRECTO','Punto 2'),(313,136,3,11,'2015-10-13','16:54:56','0403670777',4,'FUERA DE SECUENCIA','Punto 3'),(314,137,1,9,'2015-10-13','17:26:58','0403674130',1,'CORRECTO','Punto 1'),(315,137,2,10,'2015-10-13','17:26:59','0406216005',2,'CORRECTO','Punto 2'),(316,137,3,11,'2015-10-13','17:27:00','0403670777',3,'CORRECTO','Punto 3');
-
 /*Table structure for table `rondaspuntos` */
 
 DROP TABLE IF EXISTS `rondaspuntos`;
@@ -202,8 +200,6 @@ CREATE TABLE `terminales` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `terminales` */
-
-insert  into `terminales`(`terminalId`,`numero`,`nombre`,`fechaAlta`,`fechaBaja`,`observaciones`) values (1,'112339','BONITO 112339','2015-10-20','2015-10-20','Observaciones de este terminal algo más amplias');
 
 /*Table structure for table `vigilantes` */
 
