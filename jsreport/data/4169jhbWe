@@ -1,0 +1,10 @@
+{
+    "name": "dataInfTerminalRonda",
+    "dataJson": "{\n    \"ninforme\":\"Rondas por terminal\",\n    \"dFecha\": \"01/01/2015\",\n    \"hFecha\": \"31/12/2015\",\n    \"terminal\": \"TERMINAL 25\",\n    \"dHora\":\"21:01:00\",\n    \"hHora\": \"22:00:00\",       \n    \"rondas\":[\n            {\n                \"nronda\": \"Ronda 1\",\n                \"rfecha\":\"01/01/2015\",\n                \"rhora\": \"15:00:25\",\n                \"vigilante\": \"Elvis\",\n                \"validada\": \"SI\",\n                \"obsvalida\": \"Estas son observaciones de validación\",                \n                \"rresultado\":\"CORRECTO\"\n            },\n            {\n                \"nronda\": \"Ronda 2\",\n                \"rfecha\":\"13/01/2015\",\n                \"rhora\": \"16:00:25\",\n                \"vigilante\": \"La niña la puebla\",\n                \"validada\": \"NO\",\n                \"obsvalida\": \"\",                \n                \"rresultado\":\"OTRO RESULATDO\"\n            }\n            \n        ]\n}",
+    "shortid": "4169jhbWe",
+    "creationDate": "2015-10-22T11:46:04.000Z",
+    "modificationDate": {
+        "$$date": 1445873579733
+    },
+    "_id": "6YDEtV3QnHEiOUv0"
+}

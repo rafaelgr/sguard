@@ -1,0 +1,28 @@
+{
+    "engine": "handlebars",
+    "recipe": "phantom-pdf",
+    "phantom": {
+        "orientation": "portrait",
+        "format": "A4"
+    },
+    "data": {
+        "shortid": "4JxtbYw8"
+    },
+    "script": {},
+    "resources": {
+        "items": []
+    },
+    "name": "es_acHabilidadTrabajador",
+    "content": "<meta charset=\"utf-8\">\n<!-- #CSS Links -->\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css\">\n<image src=\"http://www.grupodominguis.com/images/logo-grupo-dominguis.gif\" style=\"display:none\" />\n<div class=\"well\">\n    <h1>Habilidad ({{nhabilidad}})</h1>\n    {{#each trabajadores}}\n    <h3>{{ntrabajador}}</h3>\n        <hr/>\n            <table class=\"table table-stripped table-forum\">\n                <thead class=\"txt-color-blue\">\n                    <tr>\n                        <th>Conocimiento</th>\n                        <th>Proyecto</th>\n                        <th>F.Inicio</th>\n                        <th>F.Final</th>\n                        <th>Comentarios</th>\n                    </tr>\n                </thead>\n                <tbody>\n                    {{#each conocimientos}}\n                    <tr>\n                        <td>{{nconocimiento}}</td>\n                        <td>{{proyecto}}</td>\n                        <td>{{dFecha}}</td>\n                        <td>{{hFecha}}</td>\n                        <td>{{observaciones}}</td>\n                    </tr>\n                    {{/each}}\n                </tbody>\n            </table>            \n    {{/each}}\n</div>",
+    "shortid": "Vkgs-KvI",
+    "modificationDate": {
+        "$$date": 1445334202440
+    },
+    "_id": "rZPd5cydzZdiOZE5",
+    "@odata": {
+        "context": "https://localhost:8443/odata/$metadata#templates/$entity",
+        "editLink": "https://localhost:8443/odatatemplates/('rZPd5cydzZdiOZE5')",
+        "id": "https://localhost:8443/odatatemplates/('rZPd5cydzZdiOZE5')"
+    },
+    "version": null
+}

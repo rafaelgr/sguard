@@ -1,0 +1,26 @@
+{
+    "engine": "handlebars",
+    "recipe": "phantom-pdf",
+    "phantom": {
+        "orientation": "portrait",
+        "format": "A4",
+        "headerHeight": "2 cm",
+        "header": "<div style=\"padding-bottom:2px;\">\n\t<img src='{#image FalckSCI-logo-web}' style=\"height:50px;\"/>\n</div>",
+        "footer": "<div style='text-align:center'>{#pageNum}/{#numPages}</div>"
+    },
+    "data": {
+        "shortid": "Ek3ivR-We"
+    },
+    "resources": {
+        "items": []
+    },
+    "script": {},
+    "name": "infPuntoRonda",
+    "content": "<meta charset=\"utf-8\">\n<!-- #CSS Links -->\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css\">\n<img src='{#image FalckSCI-logo-web}' style=\"display:none;\"/>\n<div class=\"well\">\n    <div style=\"text-align:right;\">\n        <h1>{{ninforme}}</h1>\n        <h3>{{dFecha}} - {{hFecha}} ({{dHora}} - {{hHora}})</h3>\n    </div>\n    <div>\n        <h1><b>Punto:</b> {{punto}}</h1>\n        <h4>\n            <b>Grupo: </b> {{grupo}}\n            <b>Edificio: </b> {{edificio}}\n            <b>Cota: </b> {{cota}}\n            <b>Cubiculo: </b> {{cubiculo}}\n        </h4>\n    </div>    \n        <hr/>\n            <table class=\"table table-stripped table-forum\">\n                <thead class=\"txt-color-blue\">\n                    <tr>\n                        <th>Ronda</th>\n                        <th>Fecha</th>\n                        <th>Hora</th>\n                        <th>Vigilante</th>\n                        <th>Terminal</th>\n                        <th>Resultado</th>\n                    </tr>\n                </thead>\n                <tbody>\n                    {{#each rondas}}\n                    <tr>\n                        <td>{{ronda}}</td>\n                        <td>{{fecha}}</td>\n                        <td>{{hora}}</td>\n                        <td>{{vigilante}}</td>\n                        <td>{{terminal}}</td>\n                        <td>{{resultado}}</td>\n                    </tr>\n                    {{/each}}\n                </tbody>\n            </table>            \n</div>",
+    "shortid": "NyJ4YRbbl",
+    "modificationDate": {
+        "$$date": 1445960684818
+    },
+    "_id": "2FW7IfRQwwmpN0rC",
+    "version": null
+}

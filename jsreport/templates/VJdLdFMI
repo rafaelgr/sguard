@@ -1,0 +1,23 @@
+{
+    "engine": "handlebars",
+    "recipe": "phantom-pdf",
+    "phantom": {
+        "orientation": "portrait",
+        "format": "A4"
+    },
+    "data": {
+        "shortid": "E1E2utMI"
+    },
+    "script": {},
+    "resources": {
+        "items": []
+    },
+    "name": "es_acProyectoConocimiento",
+    "content": "<meta charset=\"utf-8\">\n<!-- #CSS Links -->\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css\">\n<image src=\"http://www.grupodominguis.com/images/logo-grupo-dominguis.gif\" style=\"display:none\" />\n<div class=\"well\">\n    <h1>Áreas conocimiento ({{proyecto}})</h1>\n    {{#each categorias}}\n    <h3>{{ncategoria}}</h3>\n        <hr/>\n        {{#each conocimientos}}\n            <i><h4>{{nconocimiento}}</h4></i>\n            <table class=\"table table-stripped table-forum\">\n                <thead class=\"txt-color-blue\">\n                    <tr>\n                        <th>Trabajador</th>\n                        <th>F.Inicio</th>\n                        <th>F.Final</th>\n                        <th>Comentarios</th>\n                    </tr>\n                </thead>\n                <tbody>\n                    {{#each trabajadores}}\n                    <tr>\n                        <td>{{ntrabajador}}</td>\n                        <td>{{dFecha}}</td>\n                        <td>{{hFecha}}</td>\n                        <td>{{observaciones}}</td>\n                    </tr>\n                    {{/each}}\n                </tbody>\n            </table>            \n        {{/each}}\n    {{/each}}\n</div>",
+    "shortid": "VJdLdFMI",
+    "modificationDate": {
+        "$$date": 1434035523207
+    },
+    "_id": "XQt4ldzFMek7Ztfr",
+    "version": null
+}

@@ -1,0 +1,10 @@
+{
+    "name": "datInfPuntoRonda",
+    "dataJson": "{\n    \"ninforme\":\"Control de puntos\",\n    \"dFecha\": \"01/01/2015\",\n    \"hFecha\": \"31/12/2015\",\n    \"punto\": \"Guapo punto\",\n    \"grupo\": \"Grupo 1\",\n    \"edificio\": \"Edificio 1\",\n    \"cota\": \"Cota 1\",\n    \"cubiculo\": \"Cubiculo1\",\n    \"dHora\":\"21:01:00\",\n    \"hHora\": \"22:00:00\",     \n    \"rondas\":[\n            {\n                \"ronda\": \"Ronda 1\",\n                \"fecha\":\"01/01/2015\",\n                \"hora\": \"15:00:25\",\n                \"vigilante\": \"Elvis\",\n                \"terminal\": \"T1\",\n                \"resultado\":\"CORRECTO\"\n            },\n            {\n                \"ronda\": \"Ronda 2\",\n                \"fecha\":\"13/01/2015\",\n                \"hora\": \"16:00:25\",\n                \"vigilante\": \"La niña la puebla\",\n                \"terminal\": \"T1\",\n                \"resultado\":\"OTRO RESULATDO\"\n            }\n            \n        ]\n}",
+    "shortid": "Ek3ivR-We",
+    "creationDate": "2015-10-22T13:45:47.000Z",
+    "modificationDate": {
+        "$$date": 1445873841059
+    },
+    "_id": "QSYuiMqIbTGWxTQa"
+}

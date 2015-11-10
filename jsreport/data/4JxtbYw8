@@ -1,0 +1,12 @@
+{
+    "name": "dataHabilidadTrabajador",
+    "dataJson": "  {\n    \"nhabilidad\": \"Preparador de techos2\",\n    \"trabajadores\": [\n      {\n        \"ntrabajador\": \"Fernando Condren 2\",\n        \"conocimientos\": [\n          {\n            \"nconocimiento\": \"Ensamblado estructural\",\n            \"proyecto\": \"Central 21\",\n            \"dFecha\": \"01/02/2015\",\n            \"hFecha\": \"01/06/2015\",\n            \"observaciones\": \"Esta es una observacion  especial\"\n          },\n          {\n            \"nconocimiento\": \"Ensamblado estructural\",\n            \"proyecto\": \"Central 21\",\n            \"dFecha\": \"01/02/2015\",\n            \"hFecha\": \"10/04/2015\",\n            \"observaciones\": \"Estas son algunas\"\n          }\n        ]\n      },\n      {\n        \"ntrabajador\": \"Juan Martin\",\n        \"conocimientos\": [\n          {\n            \"nconocimiento\": \"Ensamblado estructural\",\n            \"proyecto\": \"Central 21\",\n            \"dFecha\": \"01/02/2015\",\n            \"hFecha\": null,\n            \"observaciones\": null\n          }\n        ]\n      },\n      {\n        \"ntrabajador\": \"Maria Esquery\",\n        \"conocimientos\": [\n          {\n            \"nconocimiento\": \"Ensamblado estructural\",\n            \"proyecto\": \"Desmantelamiento Planta 3425\",\n            \"dFecha\": \"04/01/2015\",\n            \"hFecha\": \"31/12/2015\",\n            \"observaciones\": \"Este es un commentario\"\n          }\n        ]\n      },\n      {\n        \"ntrabajador\": \"Pedro LaGuardia\",\n        \"conocimientos\": [\n          {\n            \"nconocimiento\": \"Ensamblado estructural\",\n            \"proyecto\": \"Desmantelamiento Planta 3425\",\n            \"dFecha\": \"01/01/2015\",\n            \"hFecha\": \"13/06/2015\",\n            \"observaciones\": \"Tiene una fecha nula (ya no la tiene) ss\"\n          }\n        ]\n      }\n    ]\n  }\n",
+    "shortid": "4JxtbYw8",
+    "creationDate": {
+        "$$date": 1434358367901
+    },
+    "modificationDate": {
+        "$$date": 1434358367901
+    },
+    "_id": "607PU9I6MjAy23t4"
+}
