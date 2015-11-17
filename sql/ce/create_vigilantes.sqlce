@@ -1,0 +1,10 @@
+-- Script Date: 11/16/2015 10:52 AM  - ErikEJ.SqlCeScripting version 3.5.2.56
+CREATE TABLE [vigilantes] (
+  [vigilanteId] int NOT NULL
+, [nombre] nvarchar(255) NOT NULL
+, [tag] nvarchar(255) NOT NULL
+, [tagf] nvarchar(255) NULL
+);
+GO
+ALTER TABLE [vigilantes] ADD CONSTRAINT [PK_vigilantes] PRIMARY KEY ([vigilanteId]);
+GO

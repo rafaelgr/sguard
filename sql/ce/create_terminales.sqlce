@@ -1,0 +1,12 @@
+-- Script Date: 11/16/2015 10:50 AM  - ErikEJ.SqlCeScripting version 3.5.2.56
+CREATE TABLE [terminales] (
+  [terminalId] int NOT NULL
+, [numero] nvarchar(255) NOT NULL
+, [nombre] nvarchar(255) NOT NULL
+, [fechaAlta] datetime NOT NULL
+, [fechaBaja] datetime NULL
+, [observaciones] ntext NULL
+);
+GO
+ALTER TABLE [terminales] ADD CONSTRAINT [PK_terminales] PRIMARY KEY ([terminalId]);
+GO

@@ -1,0 +1,16 @@
+-- Script Date: 11/16/2015 10:43 AM  - ErikEJ.SqlCeScripting version 3.5.2.56
+CREATE TABLE [rondas_realizadas] (
+  [rondaRealizadaId] int NOT NULL
+, [rondaId] int NOT NULL
+, [terminalId] int NOT NULL
+, [vigilanteId] int NOT NULL
+, [fechaHora] datetime NOT NULL
+, [resultado] ntext NULL
+, [validada] tinyint NOT NULL
+, [obsvalida] ntext NULL
+, [incidenciaId] int NULL
+, [observaciones] ntext NULL
+);
+GO
+ALTER TABLE [rondas_realizadas] ADD CONSTRAINT [PK_rondas_realizadas] PRIMARY KEY ([rondaRealizadaId]);
+GO

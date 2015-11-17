@@ -1,0 +1,15 @@
+-- Script Date: 11/16/2015 10:27 AM  - ErikEJ.SqlCeScripting version 3.5.2.56
+CREATE TABLE [descargas_lineas] (
+  [descargaLineaId] int IDENTITY (1,1) NOT NULL
+, [descargaId] int NOT NULL
+, [tag] nvarchar(255) NOT NULL
+, [fechaHora] datetime NOT NULL
+, [tipo] nvarchar(255) NULL
+, [tipoId] int NULL
+, [nombre] nvarchar(255) NULL
+, [incidenciaId] int NULL
+, [observaciones] ntext NULL
+);
+GO
+ALTER TABLE [descargas_lineas] ADD CONSTRAINT [PK_descargas_lineas] PRIMARY KEY ([descargaLineaId]);
+GO

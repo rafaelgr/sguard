@@ -1,0 +1,13 @@
+-- Script Date: 11/16/2015 10:39 AM  - ErikEJ.SqlCeScripting version 3.5.2.56
+CREATE TABLE [puntos] (
+  [puntoId] int NOT NULL
+, [nombre] nvarchar(255) NOT NULL
+, [edificioId] int NOT NULL
+, [tag] nvarchar(255) NULL
+, [cota] nvarchar(255) NULL
+, [cubiculo] nvarchar(255) NULL
+, [observaciones] ntext NULL
+);
+GO
+ALTER TABLE [puntos] ADD CONSTRAINT [PK_puntos] PRIMARY KEY ([puntoId]);
+GO

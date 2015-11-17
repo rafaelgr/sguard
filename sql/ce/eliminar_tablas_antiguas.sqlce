@@ -1,0 +1,27 @@
+-- Script Date: 11/16/2015 10:05 AM  - ErikEJ.SqlCeScripting version 3.5.2.56
+drop table DatosRevision;
+go
+drop table Dispositivo;
+go
+drop table Empresa;
+go
+drop table Grupo_Trabajo;
+go
+drop table Incidencia;
+go
+drop table Instalacion;
+go
+drop table ModeloDispositivo;
+go
+drop table Programa;
+go
+drop table Revision;
+go
+drop table Sustituciones;
+go
+drop table TipoAnomalia;
+go
+drop table TipoDispositivo;
+go
+drop table Usuario;
+GO

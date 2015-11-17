@@ -1,0 +1,8 @@
+-- Script Date: 11/16/2015 10:36 AM  - ErikEJ.SqlCeScripting version 3.5.2.56
+CREATE TABLE [edificios] (
+  [edificioId] int NOT NULL
+, [nombre] nvarchar(255) NOT NULL
+);
+GO
+ALTER TABLE [edificios] ADD CONSTRAINT [PK_edificios] PRIMARY KEY ([edificioId]);
+GO

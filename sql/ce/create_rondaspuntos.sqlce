@@ -1,0 +1,10 @@
+-- Script Date: 11/16/2015 10:48 AM  - ErikEJ.SqlCeScripting version 3.5.2.56
+CREATE TABLE [rondaspuntos] (
+  [rondaPuntoId] int NOT NULL
+, [orden] int NOT NULL
+, [rondaId] int NOT NULL
+, [puntoId] int NOT NULL
+);
+GO
+ALTER TABLE [rondaspuntos] ADD CONSTRAINT [PK_rondaspuntos] PRIMARY KEY ([rondaPuntoId]);
+GO

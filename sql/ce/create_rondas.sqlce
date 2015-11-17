@@ -1,0 +1,10 @@
+-- Script Date: 11/16/2015 10:41 AM  - ErikEJ.SqlCeScripting version 3.5.2.56
+CREATE TABLE [rondas] (
+  [rondaId] int NOT NULL
+, [nombre] nvarchar(255) NOT NULL
+, [tag] nvarchar(255) NOT NULL
+, [tagf] nvarchar(255) NULL
+);
+GO
+ALTER TABLE [rondas] ADD CONSTRAINT [PK_rondas] PRIMARY KEY ([rondaId]);
+GO

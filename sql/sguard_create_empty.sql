@@ -134,6 +134,8 @@ CREATE TABLE `rondas_realizadas` (
   `fecha` date DEFAULT NULL,
   `hora` time DEFAULT NULL,
   `resultado` text,
+  `validada` tinyint(1) DEFAULT NULL,
+  `obsvalida` text,
   PRIMARY KEY (`rondaRealizadaId`),
   KEY `ref_ronda2` (`rondaId`),
   KEY `ref_vigilante` (`vigilanteId`),

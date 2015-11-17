@@ -1,0 +1,10 @@
+-- Script Date: 11/16/2015 10:24 AM  - ErikEJ.SqlCeScripting version 3.5.2.56
+CREATE TABLE [descargas] (
+  [nterminal] nvarchar(255) NOT NULL
+, [descargaId] int NOT NULL
+, [fechaHora] datetime NOT NULL
+, [resultado] nvarchar(255) NULL
+);
+GO
+ALTER TABLE [descargas] ADD CONSTRAINT [PK_descargas] PRIMARY KEY ([descargaId]);
+GO

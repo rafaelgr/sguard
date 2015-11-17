@@ -1,0 +1,8 @@
+-- Script Date: 11/16/2015 10:37 AM  - ErikEJ.SqlCeScripting version 3.5.2.56
+CREATE TABLE [grupos] (
+  [grupoId] int NOT NULL
+, [nombre] nvarchar(255) NOT NULL
+);
+GO
+ALTER TABLE [grupos] ADD CONSTRAINT [PK_grupos] PRIMARY KEY ([grupoId]);
+GO
