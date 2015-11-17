@@ -1,4 +1,5 @@
 {
     "apiPort": 5000,
-    "apiHost": "localhost"
+    "apiHost": "localhost",
+    "cn50sdf": "C:\\Proyectos\\sguard\\dbce\\"
 }

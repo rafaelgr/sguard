@@ -1,0 +1,18 @@
+delete from administradores;
+go
+delete from edificios;
+go
+delete from grupos;
+go
+delete from incidencias;
+go
+delete from puntos;
+go
+delete from rondas;
+go
+delete from rondaspuntos;
+go
+delete from terminales;
+go
+delete from vigilantes;
+go

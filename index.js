@@ -11,6 +11,7 @@ var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var serveIndex = require('serve-index');
 
 // api support
 var terminalApi = require('./lib/terminal/terminal-api');
@@ -25,6 +26,7 @@ var edificios_router = require('./lib/edificios/edificios_controller');
 var descargas_router = require('./lib/descargas/descargas_controller');
 var informes_router = require('./lib/informes/informes_controller');
 var terminales_router = require('./lib/terminales/terminales_controller');
+var incidencias_router = require('./lib/incidencias/incidencias_controller');
 var cn50_router = require('./lib/cn50/cn50_controller');
 
 // read app parameters (host and port for the API)
@@ -45,6 +47,8 @@ app.use(cors());
 
 // servidor html estático
 app.use(express.static(__dirname+"/public"));
+app.use('/ficheros', serveIndex(__dirname + '/public/ficheros',{'icons': true, 'view': 'details'}));
+
 
 
 // mounting routes
@@ -88,6 +92,7 @@ app.use('/api/edificios', edificios_router);
 app.use('/api/descargas', descargas_router);
 app.use('/api/informes', informes_router);
 app.use('/api/terminales', terminales_router);
+app.use('/api/incidencias', incidencias_router);
 app.use('/api/cn50', cn50_router);
 
 
