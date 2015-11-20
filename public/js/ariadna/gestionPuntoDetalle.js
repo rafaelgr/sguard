@@ -94,7 +94,7 @@ function initTablaPuntos() {
             responsiveHelper_dt_basic.respond();
         },
         fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-            if (aData.presultado != 'CORRECTO') {
+            if (aData.resultado != 'CORRECTO') {
                 $(nRow).css('color', 'red')
             }
         },
@@ -156,7 +156,7 @@ function loadTablaPuntos(data) {
 
 function salir() {
     var mf = function() {
-        var url = "GestionRonda.html";
+        var url = "GestionPunto.html";
         window.open(url, '_self');
     }
     return mf;
