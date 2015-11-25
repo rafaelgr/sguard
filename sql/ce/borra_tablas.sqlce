@@ -1,5 +1,9 @@
 delete from administradores;
 go
+delete from descargas;
+go
+delete from descargas_lineas;
+go
 delete from edificios;
 go
 delete from grupos;

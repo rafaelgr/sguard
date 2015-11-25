@@ -25,6 +25,7 @@ function initForm() {
     vm = new admData();
     ko.applyBindings(vm);
     // asignación de eventos al clic
+    $("#btnInforme").click(aceptarPDF());
     $("#btnAceptar").click(aceptar());
     $("#btnSalir").click(salir());
     $("#btnAgregar").click(agregarPunto());
@@ -582,3 +583,66 @@ function tagf() {
     }
     return mf;
 }
+
+
+function aceptarPDF() {
+    var mf = function() {
+
+        $.ajax({
+            type: "GET",
+            url: myconfig.apiUrl + "/api/informes/rondas/plantilla/?rondaId=" +vm.rondaId(),
+            dataType: "json",
+            contentType: "application/json",
+            success: function(data, status) {
+                // hay que mostrarlo en la zona de datos
+                // vm.asignaciones(data);
+                if (data.puntos.length == 0) {
+                    mostrarMensajeSmart("No se puede mostrar la plantilla. Verifique que la ronda está dada de alta y tiene puntos asignados");
+                } else {
+                    informePDF(data);
+                }
+
+            },
+            error: errorAjax
+        });
+    }
+    return mf;
+}
+
+function informePDF(data) {
+    var data = {
+        "template": {
+            "shortid": "4y8Nlq0Xl"
+        },
+        "data": data
+    }
+    f_open_post("POST", myconfig.reportUrl + "/api/report", data);
+}
+
+var f_open_post = function(verb, url, data, target) {
+    var form = document.createElement("form");
+    form.action = url;
+    form.method = verb;
+    form.target = target || "_blank";
+    //if (data) {
+    //    for (var key in data) {
+    //        var input = document.createElement("textarea");
+    //        input.name = key;
+    //        input.value = typeof data[key] === "object" ? JSON.stringify(data[key]) : data[key];
+    //        form.appendChild(input);
+    //    }
+    //}
+    var input = document.createElement("textarea");
+    input.name = "template[shortid]";
+    input.value = data.template.shortid;
+    form.appendChild(input);
+
+    input = document.createElement("textarea");
+    input.name = "data";
+    input.value = JSON.stringify(data.data);
+    form.appendChild(input);
+
+    form.style.display = 'none';
+    document.body.appendChild(form);
+    form.submit();
+};
