@@ -50,6 +50,7 @@ function initForm() {
     ko.applyBindings(vm);
     // asignación de eventos al clic
     $("#btnAceptar").click(aceptar());
+    $("#btnAceptarExcel").click(aceptarExcel());
 
     // cargar combos
     loadPosiblesRondas();
@@ -166,6 +167,60 @@ function aceptar() {
     return mf;
 }
 
+function aceptarExcel() {
+    var mf = function() {
+        if (!datosOK())
+            return;
+        // control de fechas 
+        var fecha1, fecha2;
+        if (moment(vm.fechaInicio(), "DD/MM/YYYY").isValid())
+            fecha1 = moment(vm.fechaInicio(), "DD/MM/YYYY").format("YYYY-MM-DD");
+        if (moment(vm.fechaFinal(), "DD/MM/YYYY").isValid())
+            fecha2 = moment(vm.fechaFinal(), "DD/MM/YYYY").format("YYYY-MM-DD");
+        var ronda = "*";
+        var vigilante = "*";
+        var terminal = "*";
+        if (vm.ronda()) {
+            ronda = vm.ronda().rondaId;
+        }
+        if (vm.vigilante()) {
+            vigilante = vm.vigilante().vigilanteId;
+        }
+        if (vm.terminal()) {
+            terminal = vm.terminal().terminalId;
+        }
+        var dHora = "*";
+        var hHora = "*";
+        if (vm.dHora()) {
+            dHora = vm.dHora();
+        }
+        if (vm.hHora()) {
+            hHora = vm.hHora();
+        }        
+        $.ajax({
+            type: "GET",
+            url: myconfig.apiUrl + "/api/informes/rondas/generalexcel/?dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&ronda=" + ronda + "&vigilante=" + vigilante + "&terminal=" + terminal + "&dhora=" + dHora + "&hhora=" + hHora,
+            dataType: "json",
+            contentType: "application/json",
+            success: function(data, status) {
+                // hay que mostrarlo en la zona de datos
+                // vm.asignaciones(data);
+                if (data.length == 0) {
+                    mostrarMensajeSmart("No hay rondas con estos criterios");
+                } else {
+                    var d = {
+                        datos: data
+                    };
+                    informeExcel(d);
+                }
+
+            },
+            error: errorAjax
+        });
+    }
+    return mf;
+}
+
 function informePDF(data) {
     var data = {
         "template": {
@@ -174,6 +229,16 @@ function informePDF(data) {
         "data": data
     }
     f_open_post("POST", myconfig.reportUrl + "/api/report", data);
+}
+
+function informeExcel(data) {
+    var data = {
+        "template": {
+            "shortid": "EJxn_zxVx"
+        },
+        "data": data
+    }
+    f_open_post("POST", myconfig.reportUrl + "/api/report", data,"_self");
 }
 
 var f_open_post = function(verb, url, data, target) {
