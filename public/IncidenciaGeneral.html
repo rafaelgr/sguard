@@ -311,7 +311,7 @@
             <ol class="breadcrumb">
                 <li>Inicio</li>
                 <li>Administración</li>
-                <li>Terminales</li>
+                <li>Incidencias</li>
             </ol>
             <!-- end breadcrumb -->
             <!-- You can also add more buttons to the
@@ -335,8 +335,8 @@
                     <h1 class="page-title txt-color-blueDark">
 
                             <!-- PAGE HEADER -->
-                            <i class="fa-fw fa fa-mobile-phone"></i>
-                            Terminales <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
+                            <i class="fa-fw fa fa-crosshairs"></i>
+                            Incidencias <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
                         </h1>
                 </div>
                 <!-- end col -->
@@ -389,7 +389,7 @@
                                 -->
                             <header>
                                 <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                <h2>Mantenimiento terminales </h2>
+                                <h2>Mantenimiento incidencias </h2>
                             </header>
                             <!-- widget div-->
                             <div>
@@ -404,7 +404,7 @@
                                     <!-- this is what the user will see -->
                                     <form id="frmBuscar" class="smart-form">
                                         <header>
-                                            Buscar terminales por numero.
+                                            Buscar incidencias por nombre.
                                         </header>
                                         <fieldset>
                                             <div class="row">
@@ -427,21 +427,12 @@
                                             </div>
                                         </fieldset>
                                     </form>
-                                    <div id="tbTerminal" style="display:none;">
-                                        <table id="dt_terminal" class="table table-striped table-bordered table-hover" width="100%">
+                                    <div id="tbIncidencia" style="display:none;">
+                                        <table id="dt_incidencia" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th data-class="expand">
-                                                        <i class="fa fa-fw fa-mobile-phone text-muted hidden-md hidden-sm hidden-xs"></i> Numero
-                                                    </th>
-                                                    <th data-hide="phone">
-                                                        Nombre
-                                                    </th>
-                                                    <th data-hide="phone">
-                                                        Fecha de alta
-                                                    </th>
-                                                    <th data-hide="phone">
-                                                        Fecha de baja
+                                                        <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Nombre
                                                     </th>
                                                     <th>
                                                     </th>
@@ -538,12 +529,9 @@
     <script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>
     <!-- PAGE RELATED PLUGIN(S) 
         <script src="..."></script>-->
-    <!-- Date and time format -->
-    <script src="js/moment.js"></script>
-    <script src="js/moment_locale.js"></script>
     <script src="js/ariadna/comun.js"></script>
     <script src="myconfig.js"></script>
-    <script src="js/ariadna/terminalGeneral.js"></script>
+    <script src="js/ariadna/incidenciaGeneral.js"></script>
     <!-- PAGE RELATED PLUGIN(S) -->
     <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="js/plugin/datatables/dataTables.colVis.min.js"></script>

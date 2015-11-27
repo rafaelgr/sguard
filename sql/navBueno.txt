@@ -45,6 +45,11 @@
                                 <i class="fa fa-sitemap"></i> Rondas
                             </a>
                         </li>
+                        <li id="incidencias">
+                            <a href="IncidenciaGeneral.html">
+                                <i class="fa fa-crosshairs"></i> Incidencias
+                            </a>
+                        </li> 
                     </ul>
                 </li>
                 <li id="gestion">
