@@ -25,12 +25,10 @@ function comprobarLogin() {
 function nivelesUsuario(nivel) {
     switch (nivel) {
         case 0:
-            $('#utilidades2').hide();
             $("#chkValidada").removeAttr("disabled");
             $("#txtObsvalida").removeAttr("disabled");
             break;
         case 1:
-            $('#utilidades2').hide();
             $('#administradores').hide();
             $('#terminales').hide();
             $("#txtObsvalida").removeAttr("disabled");

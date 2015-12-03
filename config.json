@@ -1,5 +1,6 @@
 {
     "apiPort": 5000,
-    "apiHost": "localhost",
-    "cn50sdf": "C:\\Proyectos\\sguard\\public\\ficheros\\exportaciones\\"
+    "apiHost": "127.0.0.1",
+    "cn50sdfExport": "C:\\Proyectos\\sguard\\public\\ficheros\\exportaciones\\",
+    "cn50sdfImport": "C:\\Proyectos\\sguard\\public\\ficheros\\importaciones\\"
 }

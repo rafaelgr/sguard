@@ -21,50 +21,27 @@ function initForm() {
     pageSetUp();
     getVersionFooter();
     //
-    $('#btnAceptar').click(leerNumeroTerminal);
-    $('#frmLeerNum').submit(function () {
+    $('#btnAceptar').click(exportarSDF);
+    $('#frmCN50Export').submit(function () {
         return false
     });
 }
 
-function buscarAdministradores() {
-    var mf = function () {
-        if (!datosOK()) {
-            return;
-        }
-        // obtener el n.serie del certificado para la firma.
-        var aBuscar = $('#txtBuscar').val();
-        // enviar la consulta por la red (AJAX)
-        var data = {
-            "nombre": aBuscar
-        };
-        $.ajax({
-            type: "POST",
-            url: "api/administradores-buscar",
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            success: function (data, status) {
-                // hay que mostrarlo en la zona de datos
-                loadTablaAdministradores(data);
-            },
-            error: errorAjax
-        });
-    };
-    return mf;
-}
 
-var leerNumeroTerminal = function(){
+var exportarSDF = function(){
     var btnAceptar = $('#btnAceptar');
     btnAceptar.addClass('fa-spin');
     $.ajax({
-            type: "GET",
-            url: myconfig.apiUrl + "/api/terminal/read-terminal-number",
+            type: "POST",
+            url: myconfig.apiUrl + "api/cn50/createsdf",
             dataType: "json",
             contentType: "application/json",
             success: function (data, status) {
                 $('#txtRespuesta').val(data);
                 btnAceptar.removeClass('fa-spin');
+                if (data == "OK"){
+                    window.open(myconfig.cn50Url, '_self');
+                }
             },
             error: errorAjax
         });

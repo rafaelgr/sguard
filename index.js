@@ -28,6 +28,7 @@ var informes_router = require('./lib/informes/informes_controller');
 var terminales_router = require('./lib/terminales/terminales_controller');
 var incidencias_router = require('./lib/incidencias/incidencias_controller');
 var cn50_router = require('./lib/cn50/cn50_controller');
+var uploader_router = require('./lib/uploader/uploader_controller');
 
 // read app parameters (host and port for the API)
 var config = require('./config.json');
@@ -94,6 +95,7 @@ app.use('/api/informes', informes_router);
 app.use('/api/terminales', terminales_router);
 app.use('/api/incidencias', incidencias_router);
 app.use('/api/cn50', cn50_router);
+app.use('/api/uploader', uploader_router);
 
 
 // -- start server

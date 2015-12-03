@@ -220,7 +220,9 @@ function prepareValidateRondaPuntos() {
             txtOrden: {
                 required: true,
                 min: 1,
-                max: 999
+                max: 999,
+                number: true,
+                digits: true
             }
         },
         // Messages for form validation
@@ -229,7 +231,8 @@ function prepareValidateRondaPuntos() {
                 required: 'Elija un punto de control'
             },
             txtOrden: {
-                required: 'Necesita un numero de orden'
+                required: 'Necesita un numero de orden',
+                digits: 'Solo números, sin decimales'
             }
         },
 
@@ -355,6 +358,11 @@ function datosOK() {
         rules: {
             txtNombre: {
                 required: true
+            },
+            txtOrden: {
+                required: true,
+                number: true,
+                digits: true
             }
         },
         // Messages for form validation

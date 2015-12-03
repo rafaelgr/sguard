@@ -10,6 +10,7 @@
     <!-- #CSS Links -->
     <!-- Basic Styles -->
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/custom.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
     <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
     <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.min.css">
@@ -17,6 +18,10 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
     <!-- SmartAdmin RTL Support -->
     <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
+    <!-- Pivot table -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/1.3.0/pivot.min.css" />
+    <script src="js/libs/jquery-2.1.1.min.js"></script>
+    <script src="js/libs/jquery-ui-1.10.3.min.js"></script>
     <!-- We recommend you use "your_style.css" to override SmartAdmin
         specific styles this will also ensure you retrain your customization with each SmartAdmin update.
         <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
@@ -41,6 +46,31 @@
     <link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
     <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
     <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+    <style>
+    body {
+        font-family: Verdana;
+    }
+    
+    .c3-line {
+        stroke-width: 3px;
+    }
+    
+    .c3 circle {
+        stroke: white;
+    }
+    
+    .c3 text {
+        font-size: 12px;
+    }
+    
+    .c3 text {
+        font-size: 12px;
+    }
+    
+    .tick line {
+        stroke: white;
+    }
+    </style>
 </head>
 <!--
 
@@ -122,7 +152,7 @@
             <!-- fullscreen button -->
             <div id="fullscreen" class="btn-header transparent pull-right">
                 <span>
-                        <a href="javascript:void(0);" data-action="launchFullscreen" title="Pantalla completa">
+                        <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen">
                             <i class="fa fa-arrows-alt"></i>
                         </a>
                     </span>
@@ -309,9 +339,8 @@
             <!-- breadcrumb -->
             <ol class="breadcrumb">
                 <li>Inicio</li>
-                <li>Administracion</li>
-                <li>Rondas</li>
-                <li>Detalle ronda</li>
+                <li>Utilidades CN50</li>
+                <li>Importar fichero desde el terminal</li>
             </ol>
             <!-- end breadcrumb -->
             <!-- You can also add more buttons to the
@@ -327,214 +356,62 @@
         </div>
         <!-- END RIBBON -->
         <!-- MAIN CONTENT -->
-        <div id="content">
-            <!-- row -->
+        <div id="content" style="padding:10px;">
             <div class="row">
-                <!-- col -->
-                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-                    <h1 class="page-title txt-color-blueDark">
-
-                            <!-- PAGE HEADER -->
-                            <i class="fa-fw fa fa-sitemap"></i>
-                            Detalle ronda <a href="#" title="Ayuda"><i class="fa fa-question"></i></a>
-                        </h1>
+                <div class="col-md-12">
+                    <h2><i class="fa fa-lg fa-fw fa-gears"></i>CN50 Importar fichero del terminal</h2>
                 </div>
-                <!-- end col -->
-                <!-- right side of the page with the sparkline graphs -->
-                <!-- col -->
-                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
-                    <!-- sparks -->
-                    <!--                        <ul id="sparks">
-                        <li class="sparks-info">
-                        <h5>
-                        Facturas pendientes <span class="txt-color-blue">3520</span>
-                        </h5>
-                        </li>
-                        <li class="sparks-info">
-                        <h5>
-                        Clientes <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span>
-                        </h5>
-                        </li>
-                        </ul>-->
-                    <!-- end sparks -->
-                </div>
-                <!-- end col -->
             </div>
-            <!-- end row -->
-            <!--
-                The ID "widget-grid" will start to initialize all widgets below 
-                You do not need to use widgets if you dont want to. Simply remove 
-                the <section></section> and you can use wells or panels instead 
-                -->
-            <!-- widget grid -->
-            <section id="widget-grid" class="">
-                <!-- row -->
-                <div class="row">
-                    <!-- NEW WIDGET START -->
-                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <!-- Widget ID (each widget will need unique ID)-->
-                        <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
-                            <!-- widget options:
-                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-                                    
-                                data-widget-colorbutton="false" 
-                                data-widget-editbutton="false"
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                                data-widget-custombutton="false"
-                                data-widget-collapsed="true" 
-                                data-widget-sortable="false"
-                                    
-                                -->
-                            <header>
-                                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                <h2>Mantenimiento rondas </h2>
-                            </header>
-                            <!-- widget div-->
-                            <div>
-                                <!-- widget edit box -->
-                                <div class="jarviswidget-editbox">
-                                    <!-- This area used as dropdown edit box -->
-                                    <input class="form-control" type="text">
-                                </div>
-                                <!-- end widget edit box -->
-                                <!-- widget content -->
-                                <div class="widget-body">
-                                    <!-- this is what the user will see -->
-                                    <form id="frmRonda" class="smart-form">
-                                        <header>
-                                            Datos de la ronda.
-                                        </header>
-                                        <fieldset>
-                                            <div class="row">
-                                                <section class="col col-md-6">
-                                                    <label class="label">Ronda</label>
-                                                    <label class="input">
-                                                        <input id="txtNombre" name="txtNombre" type="text" data-bind="value: rnombre" />
-                                                    </label>
-                                                </section>
-                                                <section class="col col-md-6">
-                                                    <label class="label">Vigilante</label>
-                                                    <label class="input">
-                                                        <input id="txtVigilante" name="txtVigilante" type="text" data-bind="value: vnombre" />
-                                                    </label>
-                                                </section>
-                                            </div>
-                                            <div class="row">
-                                                <section class="col col-md-3">
-                                                    <label class="label">Fecha</label>
-                                                    <label class="input">
-                                                        <input id="txtFecha" name="txtFecha" type="text" data-bind="value: fecha" />
-                                                    </label>
-                                                </section>
-                                                <section class="col col-md-3">
-                                                    <label class="label">Hora</label>
-                                                    <label class="input">
-                                                        <input id="txtHora" name="txtHora" type="text" data-bind="value: hora" />
-                                                    </label>
-                                                </section>
-                                                <section class="col col-md-6">
-                                                    <label class="label">Resultado</label>
-                                                    <label class="input">
-                                                        <input id="txtResultado" name="txtResultado" type="text" data-bind="value: resultado" />
-                                                    </label>
-                                                </section>
-                                            </div>
-                                            <div class="row">
-                                                <section class="col col-md-3">
-                                                    <label class="label">Terminal</label>
-                                                    <label class="input">
-                                                        <input id="txtTerminal" name="txtTerminal" type="text" data-bind="value: tnombre" />
-                                                    </label>
-                                                </section>
-                                                <section class="col col-md-3">
-                                                    <label class="label">Validación</label>
-                                                    <label class="checkbox">
-                                                        <input id="chkValidada" name="chkValidada" type="checkbox" data-bind="checked: validada" disabled="true" />
-                                                        <i></i>Ronda validada por administrador
-                                                    </label>
-                                                </section>
-                                                <section class="col col-md-6">
-                                                    <label class="label">Observaciones validación </label>
-                                                    <label class="textarea textarea-resizable">
-                                                        <textarea id="txtObsvalida" rows="3" class="custom-scroll" data-bind="value:obsvalida" disabled="true"></textarea>
-                                                    </label>
-                                                </section>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset>
-                                            <div class="pull-right">
-                                                <button id="btnSalir" title="Salir sin guardar" class="btn btn-warning btn-circle btn-lg">
-                                                    <i class="fa fa-lg fa-sign-out"></i>
-                                                </button>
-                                                <button id="btnAceptar" title="Guardar y salir" class="btn btn-success btn-circle btn-lg">
-                                                    <i class="fa fa-lg fa-check"></i>
-                                                </button>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                    <div id="datosPuntos">
-                                        <header>
-                                            Datos de los puntos.
-                                        </header>
-                                        <div id="tbRondaPuntos">
-                                            <table id="dt_rondapuntos" class="table table-striped table-bordered table-hover" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th data-class="expand">
-                                                            <i class="fa fa-fw fa-square text-muted hidden-md hidden-sm hidden-xs"></i> Orden Leido
-                                                        </th>
-                                                        <th data-hide="phone">
-                                                            Orden R.
-                                                        </th>
-                                                        <th data-hide="phone">
-                                                            TAG Leido
-                                                        </th>
-                                                        <th data-hide="phone">
-                                                            Punto
-                                                        </th>
-                                                        <th data-hide="phone">
-                                                            Fecha
-                                                        </th>
-                                                        <th data-hide="phone">
-                                                            Hora
-                                                        </th>
-                                                        <th data-hide="phone">
-                                                            Resultado
-                                                        </th>
-                                                        <th data-hide="phone">
-                                                            Incidencia
-                                                        </th>
-                                                        <th data-hide="phone">
-                                                            Observaciones
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                        </div>
+            <div class="row">
+                <div class="well">
+                    <form id="frmCN50Import" class="smart-form">
+                        <header>
+                            Seleccione primero el terminal y fichero del que va a procesar fichajes y luego haga clic un el botón <i class="fa fa-lg fa-cog"></i>
+                        </header>
+                        <fieldset>
+                            <div class="row">
+                                <section class="col col-md-4">
+                                    <label class="label">Terminal</label>
+                                    <label class="select">
+                                        <select id="cmbTerminales" name="cmbTerminales" data-bind="options: posiblesTerminales, optionsText: 'nombre', value: terminal, valueAllowUnset: true"></select><i></i>
+                                    </label>
+                                </section>
+                                <section class="col col-md-6">
+                                    <label class="label">Seleccione el fichero a procesar</label>
+                                    <div class="input input-file">
+                                        <input type="file" id="uploadImage" name="uploadImage" />
                                     </div>
-                                </div>
-                                <!-- end widget content -->
+                                </section>
                             </div>
-                            <!-- end widget div -->
-                        </div>
-                        <!-- end widget -->
-                    </article>
-                    <!-- WIDGET END -->
+                            <div class="row">
+                                <section class="col col-md-12">
+                                    <div id="txtRespuesta">
+                                        Zona de respuesta desde el servidor
+                                    </div>
+                                </section>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="pull-right">
+                                <button id="btnAceptar" title="Enviar mensaje a terminal" class="btn btn-primary btn-circle btn-lg">
+                                    <i class="fa fa-lg fa-cog"></i>
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
                 </div>
-                <!-- end row -->
-            </section>
-            <!-- end widget grid -->
+            </div>
         </div>
-        <!-- END MAIN CONTENT -->
+    </div>
+    </div>
+    <!-- END MAIN CONTENT -->
     </div>
     <!-- END MAIN PANEL -->
     <!-- PAGE FOOTER -->
     <div class="page-footer">
         <div class="row">
             <div class="col-xs-12 col-sm-6">
-                <span class="txt-color-white">FALCK <span id="versionFooter">1.0</span> <span class="hidden-xs"> -Guard System (FGS)</span> © Ariadna Software S.L. 2015-2016</span>
+                <span class="txt-color-white">Falck-SCI <span id="versionFooter">NO VERSION</span> <span class="hidden-xs"> - Guard System - FGS</span> © Ariadna Software S.L. 2015-2016</span>
             </div>
             <div class="col-xs-6 col-sm-6 text-right hidden-xs">
                 <div class="txt-color-white inline-block">
@@ -547,21 +424,10 @@
     <!--================================================== -->
     <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
     <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
-    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-    <script src="js/libs/jquery-2.1.1.min.js"></script>
-    <script>
-    if (!window.jQuery) {
-        document.write('<script src="js/libs/jquery-2.1.1.min.js"><\/script>');
-    }
-    </script>
-    <script src="js/libs/jquery-ui-1.10.3.min.js"></script>
-    <script>
-    if (!window.jQuery.ui) {
-        document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-    }
-    </script>
     <!-- IMPORTANT: APP CONFIG -->
     <script src="js/app.config.js"></script>
+    <script src="myconfig.js"></script>
+    <script src="js/knockout-3.1.0.js"></script>
     <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
     <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>
     <!-- BOOTSTRAP JS -->
@@ -586,6 +452,7 @@
     <script src="js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
     <!-- FastClick: For mobile devices -->
     <script src="js/plugin/fastclick/fastclick.min.js"></script>
+    <script src="js/pekeUpload.js"></script>
     <!--[if IE 8]>
 
         <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
@@ -595,20 +462,11 @@
     <!--<script src="js/demo.min.js"></script>-->
     <!-- MAIN APP JS FILE -->
     <script src="js/app.min.js"></script>
-    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-    <!-- Voice command : plugin -->
-    <script src="js/speech/voicecommand.min.js"></script>
-    <!-- SmartChat UI : plugin -->
-    <script src="js/smart-chat-ui/smart.chat.ui.min.js"></script>
-    <script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>
-    <!--- KNOCKOUT JS -->
-    <script src="js/knockout-3.1.0.js"></script>
-    <script src="js/moment.js"></script>
     <!-- PAGE RELATED PLUGIN(S) 
         <script src="..."></script>-->
     <script src="myconfig.js"></script>
     <script src="js/ariadna/comun.js"></script>
-    <script src="js/ariadna/gestionRondaDetalle.js"></script>
+    <script src="js/ariadna/cn50Import.js"></script>
     <!-- PAGE RELATED PLUGIN(S) -->
     <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="js/plugin/datatables/dataTables.colVis.min.js"></script>

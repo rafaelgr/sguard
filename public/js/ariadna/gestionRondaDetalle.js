@@ -159,6 +159,10 @@ function initTablaPuntos() {
             data: "phora"
         }, {
             data: "presultado"
+        }, {
+            data: "pincidencia"
+        }, {
+            data: "observaciones"
         }]
     });
 }
