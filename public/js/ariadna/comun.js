@@ -140,6 +140,13 @@ function setCookie(c_name, value, exdays) {
     document.cookie = c_name + "=" + c_value;
 }
 
+function deleteCookie(c_name) {
+    if (!are_cookies_enabled()) {
+        alert("NO COOKIES");
+    }
+    document.cookie = c_name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
 function getCookie(c_name) {
     var i, x, y, ARRcookies = document.cookie.split(";");
     for (i = 0; i < ARRcookies.length; i++) {

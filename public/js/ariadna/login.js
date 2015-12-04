@@ -12,6 +12,8 @@ function initForm() {
     $("#login-form").submit(function () {
         return false;
     });
+    // borramos cookies anteriores
+    deleteCookie("admin");
 }
 
 function loginData() {
