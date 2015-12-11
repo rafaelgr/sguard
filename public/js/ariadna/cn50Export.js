@@ -22,7 +22,7 @@ function initForm() {
     getVersionFooter();
     //
     $('#btnAceptar').click(exportarSDF);
-    $('#frmCN50Export').submit(function () {
+    $('#frmPDAExport').submit(function () {
         return false
     });
 }

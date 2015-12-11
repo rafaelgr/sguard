@@ -34,7 +34,6 @@ function nivelesUsuario(nivel) {
             $("#txtObsvalida").removeAttr("disabled");
             //
             $('#utilidades').hide();
-            $('#utilidades2').hide();
             $('#graficos').hide();
             $('#validaciones').hide();
             break;
@@ -42,7 +41,6 @@ function nivelesUsuario(nivel) {
             $('#administracion').hide();
             $('#informes').hide();
             $('#utilidades').hide();
-            $('#utilidades2').hide();
             $('#graficos').hide();
             $('#validaciones').hide();
             break;

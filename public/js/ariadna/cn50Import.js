@@ -27,7 +27,7 @@ function initForm() {
     ko.applyBindings(vm);
     createUpload(0);
     loadPosiblesTerminales();
-    $("#frmCN50Import").submit(function () {
+    $("#frmPDAImport").submit(function () {
         return false;
     });
 }
@@ -75,7 +75,17 @@ var importarCN50 = function () {
                                 $('#txtRespuesta').html(data);
                                 btnAceptar.removeClass('fa-spin');
                                 var mens = "Las lecturas de este archivo se han procesado. Recuerde exportar un fichero nuevo generado al terminal, si no puede producir duplicidades en futuras importaciones.";
-                                mostrarMensajeSmart(mens);
+                                $.SmartMessageBox({
+                                    title: "<i class='fa fa-info'></i> Mensaje",
+                                    content: mens,
+                                    buttons: '[Aceptar]'
+                                }, function (ButtonPressed) {
+                                    if (ButtonPressed === "Aceptar") {
+                                        // aquí hay que lanzar la exportación.
+                                        var url = "PDAExport.html";
+                                        window.open(url, '_self');
+                                    }
+                                });
                             },
                             error: errorAjax
                         });
@@ -134,7 +144,7 @@ function loadPosiblesTerminales() {
 }
 
 function datosOK() {
-    $('#frmCN50Import').validate({
+    $('#frmPDAImport').validate({
         rules: {
             cmbTerminales: {
                 required: true
@@ -152,11 +162,11 @@ function datosOK() {
             error.insertAfter(element.parent());
         }
     });
-    var opciones = $("#frmCN50Import").validate().settings;
+    var opciones = $("#frmPDAImport").validate().settings;
     if (vm.terminal()) {
         opciones.rules.cmbTerminales.required = false;
     } else {
         opciones.rules.cmbTerminales.required = true;
     }
-    return $('#frmCN50Import').valid();
+    return $('#frmPDAImport').valid();
 }
