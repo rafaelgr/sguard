@@ -167,7 +167,7 @@
                             <a href="TerminalGeneral.html">
                                 <i class="fa fa-mobile-phone"></i> Terminales
                             </a>
-                        </li>                        
+                        </li>
                         <li id="vigilantes">
                             <a href="VigilanteGeneral.html">
                                 <i class="fa fa-users"></i> Usuarios
@@ -182,7 +182,7 @@
                             <a href="EdificioGeneral.html">
                                 <i class="fa fa-cube"></i> Edificios
                             </a>
-                        </li>                        
+                        </li>
                         <li id="puntos">
                             <a href="PuntoControlGeneral.html">
                                 <i class="fa fa-square"></i> Puntos Control
@@ -197,7 +197,7 @@
                             <a href="IncidenciaGeneral.html">
                                 <i class="fa fa-crosshairs"></i> Incidencias
                             </a>
-                        </li> 
+                        </li>
                     </ul>
                 </li>
                 <li id="gestion">
@@ -219,7 +219,7 @@
                             <a href="GestionDescarga.html">
                                 <i class="fa fa-download"></i> Descargas
                             </a>
-                        </li>                        
+                        </li>
                     </ul>
                 </li>
                 <li id="informes">
@@ -231,7 +231,7 @@
                             <a href="InfGeneral.html">
                                 <i class="fa fa-file-pdf-o"></i> Informe general
                             </a>
-                        </li>                    
+                        </li>
                         <li>
                             <a href="InfRonda.html">
                                 <i class="fa fa-file-pdf-o"></i> Rondas general
@@ -253,7 +253,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>                
+                </li>
                 <li id="utilidades">
                     <a href="#">
                         <i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">UTILIDADES TERM.</span>
@@ -294,8 +294,7 @@
                     </ul>
                 </li>
             </ul>
-        </nav
-        <span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+        </nav <span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
     </aside>
     <!-- END NAVIGATION -->
     <!-- MAIN PANEL -->
@@ -404,13 +403,15 @@
                                         </header>
                                         <fieldset>
                                             <div class="row">
-                                                <section class="col col-md-8">
+                                                <section class="col col-md-12">
                                                     <label class="label">Nombre</label>
                                                     <label class="input">
                                                         <input id="txtNombre" name="txtNombre" type="text" data-bind="value: nombre" />
                                                     </label>
                                                 </section>
-                                                <section class="col col-md-4">
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-md-3">
                                                     <label class="label">TAG - INICIO</label>
                                                     <label class="input">
                                                         <i id="btnTag" class="icon-append fa fa-gear"></i>
@@ -418,11 +419,7 @@
                                                         <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Haga clic aquí para leer directamente el tag con el terminal</b>
                                                     </label>
                                                 </section>
-                                            </div>
-                                            <div class="row">
-                                                <section class="col col-md-8">
-                                                </section>
-                                                <section class="col col-md-4">
+                                                <section class="col col-md-3">
                                                     <label class="label">TAG - FINAL</label>
                                                     <label class="input">
                                                         <i id="btnTagf" class="icon-append fa fa-gear"></i>
@@ -430,6 +427,18 @@
                                                         <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Haga clic aquí para leer directamente el tag con el terminal</b>
                                                     </label>
                                                 </section>
+                                                <section class="col col-md-3">
+                                                    <label class="label">Min. entre puntos (minutos)</label>
+                                                    <label class="input">
+                                                        <input id="txtMinTime" name="txtMinTime" type="text" data-bind="value: mintime" />
+                                                    </label>
+                                                </section>
+                                                <section class="col col-md-3">
+                                                    <label class="label">Máx. entre puntos (minutos)</label>
+                                                    <label class="input">
+                                                        <input id="txtMaxTime" name="txtMaxTime" type="text" data-bind="value: maxtime" />
+                                                    </label>
+                                                </section>                                                
                                             </div>
                                         </fieldset>
                                         <fieldset>

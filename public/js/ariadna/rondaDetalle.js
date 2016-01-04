@@ -86,6 +86,8 @@ function admData() {
     self.puntos = ko.observableArray([]);
     self.tag = ko.observable();
     self.tagf = ko.observable();
+    self.mintime = ko.observable();
+    self.maxtime = ko.observable();
     // -- soporte combos
     self.posiblesPuntos = ko.observableArray();
     self.punto = ko.observable();
@@ -104,6 +106,8 @@ function loadData(data) {
     vm.puntos(data.puntos);
     vm.tag(data.tag);
     vm.tagf(data.tagf);
+    vm.mintime(data.mintime);
+    vm.maxtime(data.maxtime);
     loadTablaPuntos(data.puntos);
 }
 
@@ -363,12 +367,26 @@ function datosOK() {
                 required: true,
                 number: true,
                 digits: true
+            },
+            txtMinTime:{
+                number:true,
+                digits: true
+            },
+            txtMaxTime:{
+                number:true,
+                digits: true   
             }
         },
         // Messages for form validation
         messages: {
             txtNombre: {
                 required: 'Introduzca el nombre'
+            },
+            txtMinTime: {
+                number: "Introduzca un valor numérico válido"
+            },
+            txtMaxTime: {
+                number: "Introduzca un valor numérico válido"
             }
         },
         // Do not change code below
@@ -388,9 +406,13 @@ function aceptar() {
                 "rondaId": vm.rondaId(),
                 "nombre": vm.nombre(),
                 "tag": vm.tag(),
-                "tagf": vm.tagf()
+                "tagf": vm.tagf(),
+                "mintime": vm.mintime(),
+                "maxtime": vm.maxtime()
             }
         };
+        if (vm.mintime() == "") data.ronda.mintime = null;
+        if (vm.maxtime() == "") data.ronda.maxtime = null;
         if (rondId == 0) {
             $.ajax({
                 type: "POST",

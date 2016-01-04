@@ -59,6 +59,9 @@ function admData() {
     self.cota = ko.observable();
     self.cubiculo = ko.observable();
     self.observaciones = ko.observable();
+    self.csnmax = ko.observable();
+    self.csnmargen = ko.observable();
+    self.lastcontrol = ko.observable();
     // -- apoyo de combos
     self.posiblesGrupos = ko.observableArray([]);
     self.grupo = ko.observable();
@@ -74,8 +77,12 @@ function loadData(data) {
     vm.nombre(data.nombre);
     vm.tag(data.tag);
     vm.cota(data.cota);
+    vm.csnmax(data.csnmax);
+    vm.csnmargen(data.csnmargen);
     vm.cubiculo(data.cubiculo);
     vm.observaciones(data.observaciones);
+    if (data.lastcontrol) vm.lastcontrol(moment(data.lastcontrol).format('DD/MM/YYYY HH:mm:ss'));
+
     //
 
 }
@@ -91,6 +98,14 @@ function datosOK() {
             },
             txtTag: {
                 required: true
+            },
+            txtCsnMax:{
+                number: true,
+                digits: true
+            },
+            txtCsnMargen:{
+                number: true,
+                digits: true
             }
         },
         // Messages for form validation
@@ -100,6 +115,12 @@ function datosOK() {
             },
             txtTag: {
                 required: 'Introduzca el login'
+            },
+            txtCsnMax:{
+                number: 'Intrduzca un valor numérico'
+            },
+            txtCsnMargen:{
+                number: 'Intrduzca un valor numérico'
             }
         },
         // Do not change code below
@@ -128,9 +149,13 @@ function aceptar() {
                 "tag": vm.tag(),
                 "cota": vm.cota(),
                 "cubiculo": vm.cubiculo(),
-                "observaciones": vm.observaciones()
+                "observaciones": vm.observaciones(),
+                "csnmax": vm.csnmax(),
+                "csnmargen": vm.csnmargen()
             }
         };
+        if (data.punto.csnmax == "") data.punto.csnmax = null;
+        if (data.punto.csnmargen == "") data.punto.csnmargen = null;
         if (puntId == 0) {
             $.ajax({
                 type: "POST",

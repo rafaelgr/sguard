@@ -448,6 +448,26 @@
                                                 </section>
                                             </div>
                                             <div class="row">
+                                                <section class="col col-md-4">
+                                                    <label class="label">Max tiempo entre rondas (min) [CSN]</label>
+                                                    <label class="input">
+                                                        <input id="txtCsnMax" name="txtCsnMax" type="text" data-bind="value: csnmax" />
+                                                    </label>
+                                                </section>
+                                                <section class="col col-md-4">
+                                                    <label class="label">Margen entre rondas (min) [CSN]</label>
+                                                    <label class="input">
+                                                        <input id="txtCsnMargen" name="txtCsnMargen" type="text" data-bind="value: csnmargen" />
+                                                    </label>
+                                                </section>
+                                                <section class="col col-md-4">
+                                                    <label class="label">Último control</label>
+                                                    <label class="input">
+                                                        <input id="txtLastControl" name="txtLastControl" type="text" data-bind="value: lastcontrol" disabled />
+                                                    </label>
+                                                </section>
+                                            </div>                                            
+                                            <div class="row">
                                                 <section class="col col-md-12">
                                                     <label class="label">Observaciones </label>
                                                     <label class="textarea textarea-resizable">
@@ -561,6 +581,7 @@
     <script src="myconfig.js"></script>
     <script src="js/ariadna/puntoDetalle.js"></script>
     <script src="js/ariadna/comun.js"></script>
+    <script src="js/moment.js"></script>
     <!-- PAGE RELATED PLUGIN(S) -->
     <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="js/plugin/datatables/dataTables.colVis.min.js"></script>
