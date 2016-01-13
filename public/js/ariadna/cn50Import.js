@@ -27,7 +27,7 @@ function initForm() {
     ko.applyBindings(vm);
     createUpload(0);
     loadPosiblesTerminales();
-    $("#frmPDAImport").submit(function () {
+    $("#frmPDAImport").submit(function() {
         return false;
     });
 }
@@ -41,7 +41,7 @@ function admData() {
 
 
 
-var importarCN50 = function () {
+var importarCN50 = function() {
     if (!datosOK()) return;
     var btnAceptar = $('#btnAceptar');
     btnAceptar.addClass('fa-spin');
@@ -50,7 +50,7 @@ var importarCN50 = function () {
         url: myconfig.apiUrl + "api/cn50/descargas-lineas?file=" + fileName + "&terminalId=" + vm.terminal().terminalId,
         dataType: "json",
         contentType: "application/json",
-        success: function (lecturas, status) {
+        success: function(lecturas, status) {
             var mens = "Obtenidas las lecturas. Guardándolas en la base de datos...";
             $('#txtRespuesta').html(mens);
             data = {
@@ -63,7 +63,7 @@ var importarCN50 = function () {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (data, status) {
+                success: function(data, status) {
                     // aqui llamada a procesamiento de descargas
                     if (data) {
                         $.ajax({
@@ -71,7 +71,7 @@ var importarCN50 = function () {
                             url: myconfig.apiUrl + "/api/descargas/procesar-descarga/" + data,
                             dataType: "json",
                             contentType: "application/json",
-                            success: function (data, status) {
+                            success: function(data, status) {
                                 $('#txtRespuesta').html(data);
                                 btnAceptar.removeClass('fa-spin');
                                 var mens = "Las lecturas de este archivo se han procesado. Recuerde exportar un fichero nuevo generado al terminal, si no puede producir duplicidades en futuras importaciones.";
@@ -79,7 +79,7 @@ var importarCN50 = function () {
                                     title: "<i class='fa fa-info'></i> Mensaje",
                                     content: mens,
                                     buttons: '[Aceptar]'
-                                }, function (ButtonPressed) {
+                                }, function(ButtonPressed) {
                                     if (ButtonPressed === "Aceptar") {
                                         // aquí hay que lanzar la exportación.
                                         var url = "PDAExport.html";
@@ -92,6 +92,18 @@ var importarCN50 = function () {
                     } else {
                         $('#txtRespuesta').html("No hay lecturas en el terminal");
                         btnAceptar.removeClass('fa-spin');
+                        var mens = "No hay lecturas en el terminal. Recuerde exportar un fichero nuevo generado al terminal, si no puede producir duplicidades en futuras importaciones.";
+                        $.SmartMessageBox({
+                            title: "<i class='fa fa-info'></i> Mensaje",
+                            content: mens,
+                            buttons: '[Aceptar]'
+                        }, function(ButtonPressed) {
+                            if (ButtonPressed === "Aceptar") {
+                                // aquí hay que lanzar la exportación.
+                                var url = "PDAExport.html";
+                                window.open(url, '_self');
+                            }
+                        });
                     }
                 },
                 error: errorAjax
@@ -135,7 +147,7 @@ function loadPosiblesTerminales() {
         url: myconfig.apiUrl + "/api/terminales",
         dataType: "json",
         contentType: "application/json",
-        success: function (data, status) {
+        success: function(data, status) {
             // hay que mostrarlo en la zona de datos
             vm.posiblesTerminales(data);
         },
@@ -158,7 +170,7 @@ function datosOK() {
             }
         },
         // Do not change code below
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             error.insertAfter(element.parent());
         }
     });
