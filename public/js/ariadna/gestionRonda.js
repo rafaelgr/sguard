@@ -61,7 +61,6 @@ function initForm() {
 function initTablaRondasRealizadas() {
     tablaCarro = $('#dt_ronda').dataTable({
         autoWidth: true,
-        "order": [[ 2, "desc" ],[ 3, "desc" ]],
         preDrawCallback: function () {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {

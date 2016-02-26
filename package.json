@@ -1,6 +1,6 @@
 {
   "name": "sguard",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Server and API for SGUARD application",
   "main": "index.js",
   "scripts": {
