@@ -18,4 +18,7 @@ UPDATE puntos AS p, tmp_lastcontrol AS tmp
 	
 DROP TABLE tmp_lastcontrol;
 
+ALTER TABLE `sguard`.`rondas_realizadaspuntos`  
+  DROP FOREIGN KEY `ref_punto2`;
+
   
