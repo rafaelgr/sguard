@@ -46,6 +46,7 @@ function cargarGraficos() {
 function initTablaRondasRealizadas() {
     tablaCarro = $('#dt_ronda').dataTable({
         autoWidth: true,
+        bSort:false,
         preDrawCallback: function() {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
