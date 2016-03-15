@@ -2,5 +2,6 @@
     "apiPort": 9000,
     "apiHost": "127.0.0.1",
     "cn50sdfExport": "C:\\FalckSci\\sguard\\public\\ficheros\\exportaciones\\",
-    "cn50sdfImport": "C:\\FalckSci\\sguard\\public\\ficheros\\importaciones\\"
+    "cn50sdfImport": "C:\\FalckSci\\sguard\\public\\ficheros\\importaciones\\",
+    "dllVersion": 32
 }
