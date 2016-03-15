@@ -49,6 +49,7 @@ app.use(cors());
 // servidor html estático
 app.use(express.static(__dirname+"/public"));
 app.use('/ficheros', serveIndex(__dirname + '/public/ficheros',{'icons': true, 'view': 'details'}));
+app.use('/documentos', serveIndex(__dirname + '/public/documentos',{'icons': true, 'view': 'details'}));
 
 
 
