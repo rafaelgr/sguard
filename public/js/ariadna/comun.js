@@ -44,6 +44,22 @@ function nivelesUsuario(nivel) {
             $('#graficos').hide();
             $('#validaciones').hide();
             break;
+        case 3:
+            $('#administracion').hide();
+            $('#informes').hide();
+            $('#utilidades').hide();
+            $('#graficos').hide();
+            $('#validaciones').hide();
+            $('#gpuntos').hide();
+            $('#gdescargas').hide();
+            $('#utilidades2').hide();
+            break;            
+        case 4:
+            $('#administracion').hide();
+            $('#utilidades').hide();
+            $('#graficos').hide();
+            $('#validaciones').hide();
+            break;            
     }
 }
 

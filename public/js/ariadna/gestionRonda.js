@@ -19,6 +19,12 @@ var breakpointDefinition = {
 
 function initForm() {
     comprobarLogin();
+    var user = JSON.parse(getCookie("admin"));
+    if (user.nivel == 3){
+        // es un vigilante básico
+        var f = crearRondaRealizada();
+        f();
+    }
     // de smart admin
     pageSetUp();
     getVersionFooter();

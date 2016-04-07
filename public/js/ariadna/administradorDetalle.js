@@ -13,6 +13,12 @@ var posiblesNiveles = [{
 }, {
     id: 2,
     nombre: "Vigilante"
+},{
+    id:3,
+    nombre: "Vigilante básico"
+},{
+    id:4,
+    nombre: "Vigilante avanzado"
 }];
 
 function initForm() {
