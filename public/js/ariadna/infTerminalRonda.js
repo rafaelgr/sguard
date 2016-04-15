@@ -141,9 +141,13 @@ function aceptar() {
         if (vm.hHora()) {
             hHora = vm.hHora();
         }        
+        var url = myconfig.apiUrl + "/api/informes/rondas/terminal/?terminalId=" + vm.terminal().terminalId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora;     
+        if ($('#chkNoCorrectas').prop('checked')){
+            url = myconfig.apiUrl + "/api/informes/rondas/terminal2/?terminalId=" + vm.terminal().terminalId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora;         
+        }        
         $.ajax({
             type: "GET",
-            url: myconfig.apiUrl + "/api/informes/rondas/terminal/?terminalId=" + vm.terminal().terminalId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora,
+            url: url,
             dataType: "json",
             contentType: "application/json",
             success: function(data, status) {

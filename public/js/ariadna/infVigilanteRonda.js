@@ -140,10 +140,14 @@ function aceptar() {
         }
         if (vm.hHora()) {
             hHora = vm.hHora();
-        }         
+        }   
+        var url = myconfig.apiUrl + "/api/informes/rondas/vigilante/?vigilanteId=" + vm.vigilante().vigilanteId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora;
+        if ($('#chkNoCorrectas').prop('checked')){
+            url = myconfig.apiUrl + "/api/informes/rondas/vigilante2/?vigilanteId=" + vm.vigilante().vigilanteId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora;
+        }
         $.ajax({
             type: "GET",
-            url: myconfig.apiUrl + "/api/informes/rondas/vigilante/?vigilanteId=" + vm.vigilante().vigilanteId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora,
+            url: url,
             dataType: "json",
             contentType: "application/json",
             success: function(data, status) {
@@ -163,9 +167,13 @@ function aceptar() {
 }
 
 function informePDF(data) {
+    var shortid = "NJNgg5tJ-";
+    if ($('#chkObservaciones').prop('checked')){
+        shortid = "VJbmrHkbx";
+    }    
     var data = {
         "template": {
-            "shortid": "VJbmrHkbx"
+            "shortid": shortid
         },
         "data": data
     }

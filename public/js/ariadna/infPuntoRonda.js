@@ -141,9 +141,13 @@ function aceptar() {
         if (vm.hHora()) {
             hHora = vm.hHora();
         }        
+        var url =  myconfig.apiUrl + "/api/informes/rondas/punto/?puntoId=" + vm.punto().puntoId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora;
+        if ($('#chkNoCorrectas').prop('checked')){
+            url = myconfig.apiUrl + "/api/informes/rondas/punto2/?puntoId=" + vm.punto().puntoId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora;         
+        }        
         $.ajax({
             type: "GET",
-            url: myconfig.apiUrl + "/api/informes/rondas/punto/?puntoId=" + vm.punto().puntoId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora,
+            url: url,
             dataType: "json",
             contentType: "application/json",
             success: function(data, status) {
@@ -163,9 +167,13 @@ function aceptar() {
 }
 
 function informePDF(data) {
+    var shortid = "E16tAiKk-";
+    if ($('#chkObservaciones').prop('checked')){
+        shortid = "NyJ4YRbbl";
+    }    
     var data = {
         "template": {
-            "shortid": "NyJ4YRbbl"
+            "shortid": shortid
         },
         "data": data
     }
