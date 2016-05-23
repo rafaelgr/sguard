@@ -88,6 +88,9 @@ function admData() {
     self.tagf = ko.observable();
     self.mintime = ko.observable();
     self.maxtime = ko.observable();
+    self.csnmax = ko.observable();
+    self.csnmargen = ko.observable();
+    self.lastcontrol = ko.observable();
     // -- soporte combos
     self.posiblesPuntos = ko.observableArray();
     self.punto = ko.observable();
@@ -108,6 +111,9 @@ function loadData(data) {
     vm.tagf(data.tagf);
     vm.mintime(data.mintime);
     vm.maxtime(data.maxtime);
+    vm.csnmax(data.csnmax);
+    vm.csnmargen(data.csnmargen);
+    if (data.lastcontrol) vm.lastcontrol(moment(data.lastcontrol).format('DD/MM/YYYY HH:mm:ss'));
     loadTablaPuntos(data.puntos);
 }
 
@@ -368,13 +374,13 @@ function datosOK() {
                 number: true,
                 digits: true
             },
-            txtMinTime:{
-                number:true,
+            txtMinTime: {
+                number: true,
                 digits: true
             },
-            txtMaxTime:{
-                number:true,
-                digits: true   
+            txtMaxTime: {
+                number: true,
+                digits: true
             }
         },
         // Messages for form validation
@@ -408,7 +414,9 @@ function aceptar() {
                 "tag": vm.tag(),
                 "tagf": vm.tagf(),
                 "mintime": vm.mintime(),
-                "maxtime": vm.maxtime()
+                "maxtime": vm.maxtime(),
+                "csnmax": vm.csnmax(),
+                "csnmargen": vm.csnmargen()
             }
         };
         if (vm.mintime() == "") data.ronda.mintime = null;
@@ -620,7 +628,7 @@ function aceptarPDF() {
 
         $.ajax({
             type: "GET",
-            url: myconfig.apiUrl + "/api/informes/rondas/plantilla/?rondaId=" +vm.rondaId(),
+            url: myconfig.apiUrl + "/api/informes/rondas/plantilla/?rondaId=" + vm.rondaId(),
             dataType: "json",
             contentType: "application/json",
             success: function(data, status) {
