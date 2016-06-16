@@ -58,6 +58,7 @@ function admData() {
     self.edificioId = ko.observable();
     self.cota = ko.observable();
     self.cubiculo = ko.observable();
+    self.zonaFuego = ko.observable();
     self.observaciones = ko.observable();
     self.csnmax = ko.observable();
     self.csnmargen = ko.observable();
@@ -80,6 +81,7 @@ function loadData(data) {
     vm.csnmax(data.csnmax);
     vm.csnmargen(data.csnmargen);
     vm.cubiculo(data.cubiculo);
+    vm.zonaFuego(data.zonafuego);
     vm.observaciones(data.observaciones);
     if (data.lastcontrol) vm.lastcontrol(moment(data.lastcontrol).format('DD/MM/YYYY HH:mm:ss'));
 
@@ -149,6 +151,7 @@ function aceptar() {
                 "tag": vm.tag(),
                 "cota": vm.cota(),
                 "cubiculo": vm.cubiculo(),
+                "zonafuego": vm.zonaFuego(),
                 "observaciones": vm.observaciones(),
                 "csnmax": vm.csnmax(),
                 "csnmargen": vm.csnmargen()

@@ -12,6 +12,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var serveIndex = require('serve-index');
+var moment = require('moment');
 
 // api support
 var terminalApi = require('./lib/terminal/terminal-api');
@@ -30,6 +31,8 @@ var incidencias_router = require('./lib/incidencias/incidencias_controller');
 var cn50_router = require('./lib/cn50/cn50_controller');
 var uploader_router = require('./lib/uploader/uploader_controller');
 
+
+var pack = require('./package.json');
 // read app parameters (host and port for the API)
 var config = require('./config.json');
 
@@ -103,4 +106,9 @@ app.use('/api/uploader', uploader_router);
 app.listen(config.apiPort);
 
 // -- console message
-console.log('SGUARD API / SERVER on port: ' + config.apiPort);
+console.log ("-------------------------------------------");
+console.log (" SGUARD RUNNING ", moment(new Date()).format('DD/MM/YYYYY HH:mm:ss'));
+console.log ("-------------------------------------------");
+console.log(' VERSION: ' + pack.version);
+console.log(' PORT: ' + config.apiPort);
+console.log ("-------------------------------------------");

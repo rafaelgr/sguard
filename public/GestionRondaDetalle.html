@@ -509,6 +509,8 @@
                                                         <th data-hide="phone">
                                                             Observaciones
                                                         </th>
+                                                        <th>
+                                                        </th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -529,6 +531,77 @@
         </div>
         <!-- END MAIN CONTENT -->
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title"> INCLUIR OBSERVACIONES</h4>
+                </div>
+                <div class="modal-body no-padding">
+                    <form id="point-form" class="smart-form">
+                        <fieldset>
+                            <section>
+                                <div class="row">
+                                    <section class="col col-md-3">
+                                        <strong>Orden leido: </strong>
+                                        <span data-bind="text: selpoint().ordenleido"></span>
+                                    </section>
+                                    <section class="col col-md-3">
+                                        <strong>Orden real: </strong>
+                                        <span data-bind="text: selpoint().orden"></span>
+                                    </section>
+                                    <section class="col col-md-6">
+                                        <strong>Punto: </strong>
+                                        <span data-bind="text: selpoint().pnombre"></span>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-md-3">
+                                        <strong>Fecha: </strong>
+                                        <span data-bind="text: selpoint().fecha"></span>
+                                    </section>
+                                    <section class="col col-md-3">
+                                        <strong>Hora: </strong>
+                                        <span data-bind="text: selpoint().phora"></span>
+                                    </section>
+                                    <section class="col col-md-6">
+                                        <strong>Resultado: </strong>
+                                        <span data-bind="text: selpoint().presultado"></span>
+                                    </section>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="row">
+                                    <section class="col col-md-12">
+                                        <label class="label">Observaciones: </label>
+                                        <label class="textarea textarea-resizable">
+                                            <textarea id="txtObservaciones" rows="3" class="custom-scroll" data-bind="value:selpoint().observaciones">
+                                            </textarea>
+                                        </label>
+                                    </section>
+                                </div>
+                            </section>
+                        </fieldset>
+                        <footer>
+                            <button id="btnAceptarObservaciones" class="btn btn-primary" data-dismiss="modal">
+                                Aceptar
+                            </button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Cancelar
+                            </button>
+                        </footer>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
     <!-- END MAIN PANEL -->
     <!-- PAGE FOOTER -->
     <div class="page-footer">

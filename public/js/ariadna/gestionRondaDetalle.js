@@ -8,6 +8,7 @@ var responsiveHelper_datatable_col_reorder = undefined;
 var responsiveHelper_datatable_tabletools = undefined;
 
 var dataPuntos;
+var dataPunto;
 
 var breakpointDefinition = {
     tablet: 1024,
@@ -16,6 +17,8 @@ var breakpointDefinition = {
 
 var rondId = 0;
 var llamada = "";
+
+var user = JSON.parse(getCookie("admin"));
 
 function initForm() {
     comprobarLogin();
@@ -28,10 +31,14 @@ function initForm() {
     // asignación de eventos al clic
     $("#btnSalir").click(salir());
     $("#btnAceptar").click(aceptar());
+    $("#btnAceptarObservaciones").click(aceptarObservaciones());
     $("#frmRonda").submit(function() {
         return false;
     });
-
+    // point-form
+    $("#point-form").submit(function() {
+        return false;
+    });
 
     // inicializar la tabla asociada.
     initTablaPuntos();
@@ -76,6 +83,17 @@ function admData() {
     self.validada = ko.observable();
     self.obsvalida = ko.observable();
     self.tnombre = ko.observable();
+    // -- selected point
+    self.selpoint = ko.observable({
+        orden: 0,
+        ordenleido: 0,
+        pnombre: "",
+        pfecha: "",
+        phora: "",
+        presultado: "",
+        pincidencia: "",
+        observaciones: ""
+    });
 }
 
 function loadData(data) {
@@ -91,6 +109,7 @@ function loadData(data) {
     vm.obsvalida(data.obsvalida);
     vm.tnombre(data.tnombre);
     vm.puntos(data.puntos);
+    dataPuntos = data.puntos;
     loadTablaPuntos(data.puntos);
 }
 
@@ -163,6 +182,16 @@ function initTablaPuntos() {
             data: "pincidencia"
         }, {
             data: "observaciones"
+        }, {
+            data: "rondaRealizadaPuntoId",
+            render: function(data, type, row) {
+                var bt1 = "*"
+                if (user.nivel < 2) {
+                    bt1 = "<button class='btn btn-circle btn-success btn-lg' data-toggle='modal' data-target='#myModal' onclick='editPuntoRonda(" + data + ");' title='Editar registro'> <i class='fa fa-edit fa-fw'></i> </button>";
+                }
+                var html = "<div class='pull-right'>" + bt1 + "</div>";
+                return html;
+            }
         }]
     });
 }
@@ -224,5 +253,43 @@ function aceptar() {
             error: errorAjax
         });
     };
+    return mf;
+}
+
+function editPuntoRonda(id) {
+    // Obtain point from array of points
+    var dataPunto = null;
+    for (var i = 0; i < dataPuntos.length; i++) {
+        if (dataPuntos[i].rondaRealizadaPuntoId == id) {
+            dataPunto = dataPuntos[i];
+            dataPunto.fecha = moment(dataPunto.fecha).format('DD/MM/YYYY');
+            vm.selpoint(dataPunto);
+        }
+    }
+}
+
+function aceptarObservaciones() {
+    var mf = function() {
+        // enviar put con el punto modificado
+        // de momento solo las observaciones
+        delete vm.selpoint().fecha;
+        var data = {
+            puntoRondaRealizada:{
+                observaciones: vm.selpoint().observaciones
+            }
+        };
+
+        $.ajax({
+            type: "PUT",
+            url: myconfig.apiUrl + "/api/rondas-realizadas/puntorondarealizada/" + vm.selpoint().rondaRealizadaPuntoId,
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function(data, status) {
+                loadTablaPuntos(dataPuntos);
+            },
+            error: errorAjax
+        });
+    }
     return mf;
 }
