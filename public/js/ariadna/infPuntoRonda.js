@@ -53,6 +53,38 @@ function initForm() {
 
     loadPosiblesPuntos();
 
+    $("#cmbPuntos").select2({
+        allowClear: true,
+        language: {
+            errorLoading: function() {
+                return "La carga falló";
+            },
+            inputTooLong: function(e) {
+                var t = e.input.length - e.maximum,
+                    n = "Por favor, elimine " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            inputTooShort: function(e) {
+                var t = e.minimum - e.input.length,
+                    n = "Por favor, introduzca " + t + " car";
+                return t == 1 ? n += "ácter" : n += "acteres", n;
+            },
+            loadingMore: function() {
+                return "Cargando más resultados…";
+            },
+            maximumSelected: function(e) {
+                var t = "Sólo puede seleccionar " + e.maximum + " elemento";
+                return e.maximum != 1 && (t += "s"), t;
+            },
+            noResults: function() {
+                return "No se encontraron resultados";
+            },
+            searching: function() {
+                return "Buscando…";
+            }
+        }
+    });
+
     // asignación de eventos al clic
     $("#btnAceptar").click(aceptar());
 
@@ -62,11 +94,13 @@ function initForm() {
 function admData() {
     var self = this;
     self.posiblesPuntos = ko.observableArray();
+    self.elegidosPuntos = ko.observableArray();
+    self.sPuntoId = ko.observable();
     self.punto = ko.observable();
     self.fechaInicio = ko.observable();
     self.fechaFinal = ko.observable();
     self.dHora = ko.observable();
-    self.hHora = ko.observable();    
+    self.hHora = ko.observable();
 }
 
 
@@ -140,11 +174,15 @@ function aceptar() {
         }
         if (vm.hHora()) {
             hHora = vm.hHora();
-        }        
-        var url =  myconfig.apiUrl + "/api/informes/rondas/punto/?puntoId=" + vm.punto().puntoId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora;
-        if ($('#chkNoCorrectas').prop('checked')){
-            url = myconfig.apiUrl + "/api/informes/rondas/punto2/?puntoId=" + vm.punto().puntoId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora;         
-        }        
+        }
+        // var url =  myconfig.apiUrl + "/api/informes/rondas/punto/?puntoId=" + vm.punto().puntoId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora;
+        // if ($('#chkNoCorrectas').prop('checked')){
+        //     url = myconfig.apiUrl + "/api/informes/rondas/punto2/?puntoId=" + vm.punto().puntoId + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora;         
+        // }        
+        var url = myconfig.apiUrl + "/api/informes/rondas/punto3/?puntos=" + vm.elegidosPuntos() + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora;
+        if ($('#chkNoCorrectas').prop('checked')) {
+            url = myconfig.apiUrl + "/api/informes/rondas/punto4/?puntos=" + vm.elegidosPuntos() + "&dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&dhora=" + dHora + "&hhora=" + hHora;
+        }
         $.ajax({
             type: "GET",
             url: url,
@@ -153,7 +191,7 @@ function aceptar() {
             success: function(data, status) {
                 // hay que mostrarlo en la zona de datos
                 // vm.asignaciones(data);
-                if (data.rondas.length == 0) {
+                if (data.puntos.length == 0) {
                     mostrarMensajeSmart("No hay rondas con estos criterios");
                 } else {
                     informePDF(data);
@@ -168,9 +206,9 @@ function aceptar() {
 
 function informePDF(data) {
     var shortid = "E16tAiKk-";
-    if ($('#chkObservaciones').prop('checked')){
+    if ($('#chkObservaciones').prop('checked')) {
         shortid = "NyJ4YRbbl";
-    }    
+    }
     var data = {
         "template": {
             "shortid": shortid
