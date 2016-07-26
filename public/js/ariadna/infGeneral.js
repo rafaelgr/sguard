@@ -145,10 +145,10 @@ function aceptar() {
         }
         if (vm.hHora()) {
             hHora = vm.hHora();
-        }   
-        var url = myconfig.apiUrl + "/api/informes/rondas/general/?dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&ronda=" + ronda + "&vigilante=" + vigilante + "&terminal=" + terminal + "&dhora=" + dHora + "&hhora=" + hHora;     
-        if ($('#chkNoCorrectas').prop('checked')){
-            url = myconfig.apiUrl + "/api/informes/rondas/general2/?dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&ronda=" + ronda + "&vigilante=" + vigilante + "&terminal=" + terminal + "&dhora=" + dHora + "&hhora=" + hHora;         
+        }
+        var url = myconfig.apiUrl + "/api/informes/rondas/general/?dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&ronda=" + ronda + "&vigilante=" + vigilante + "&terminal=" + terminal + "&dhora=" + dHora + "&hhora=" + hHora;
+        if ($('#chkNoCorrectas').prop('checked')) {
+            url = myconfig.apiUrl + "/api/informes/rondas/general2/?dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&ronda=" + ronda + "&vigilante=" + vigilante + "&terminal=" + terminal + "&dhora=" + dHora + "&hhora=" + hHora;
         }
         $.ajax({
             type: "GET",
@@ -200,7 +200,7 @@ function aceptarExcel() {
         }
         if (vm.hHora()) {
             hHora = vm.hHora();
-        }        
+        }
         $.ajax({
             type: "GET",
             url: myconfig.apiUrl + "/api/informes/rondas/generalexcel/?dfecha=" + fecha1 + "&hfecha=" + fecha2 + "&ronda=" + ronda + "&vigilante=" + vigilante + "&terminal=" + terminal + "&dhora=" + dHora + "&hhora=" + hHora,
@@ -227,13 +227,14 @@ function aceptarExcel() {
 
 function informePDF(data) {
     var shortid = "4k9az9KJ-"
-    if ($('#chkObservaciones').prop('checked')){
+    if ($('#chkObservaciones').prop('checked')) {
         shortid = "E1XCz-ybg"
     }
     var data = {
         "template": {
             "shortid": shortid
         },
+        "options": { "Content-Disposition": "attachment; filename=infgeneral.pdf" },
         "data": data
     }
     f_open_post("POST", myconfig.reportUrl + "/api/report", data);
@@ -246,7 +247,7 @@ function informeExcel(data) {
         },
         "data": data
     }
-    f_open_post("POST", myconfig.reportUrl + "/api/report", data,"_self");
+    f_open_post("POST", myconfig.reportUrl + "/api/report", data, "_self");
 }
 
 var f_open_post = function(verb, url, data, target) {
