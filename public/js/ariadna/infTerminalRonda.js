@@ -66,7 +66,12 @@ function admData() {
     self.fechaInicio = ko.observable();
     self.fechaFinal = ko.observable();
     self.dHora = ko.observable();
-    self.hHora = ko.observable();    
+    self.hHora = ko.observable();   
+    //
+    self.linea1 = ko.observable();
+    self.linea2 = ko.observable();
+    self.linea3 = ko.observable();
+    self.firmante = ko.observable();     
 }
 
 
@@ -167,6 +172,12 @@ function aceptar() {
 }
 
 function informePDF(data) {
+    // incluir las nuevas líneas
+    data.linea1 = vm.linea1();
+    data.linea2 = vm.linea2();
+    data.linea3 = vm.linea3();
+    data.firmante = vm.firmante();    
+    
     var data = {
         "template": {
             "shortid": "VJJVo6W-l"

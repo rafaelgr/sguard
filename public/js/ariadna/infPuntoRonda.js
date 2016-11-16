@@ -6,12 +6,12 @@ function initForm() {
     // de smart admin
     pageSetUp();
     getVersionFooter();
-    $("#frmInforme").submit(function() {
+    $("#frmInforme").submit(function () {
         return false;
     });
 
     $.validator.addMethod("greaterThan",
-        function(value, element, params) {
+        function (value, element, params) {
             var fv = moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
             var fp = moment($(params).val(), "DD/MM/YYYY").format("YYYY-MM-DD");
             if (!/Invalid|NaN/.test(new Date(fv))) {
@@ -42,7 +42,7 @@ function initForm() {
     };
 
     $.datepicker.setDefaults($.datepicker.regional['es']);
-    $.validator.addMethod("time24", function(value, element) {
+    $.validator.addMethod("time24", function (value, element) {
         if (value == "") return true;
         return /^([01]?[0-9]|2[0-3])(:[0-5][0-9]){2}$/.test(value);
     }, "Hora errónea.");
@@ -56,30 +56,30 @@ function initForm() {
     $("#cmbPuntos").select2({
         allowClear: true,
         language: {
-            errorLoading: function() {
+            errorLoading: function () {
                 return "La carga falló";
             },
-            inputTooLong: function(e) {
+            inputTooLong: function (e) {
                 var t = e.input.length - e.maximum,
                     n = "Por favor, elimine " + t + " car";
                 return t == 1 ? n += "ácter" : n += "acteres", n;
             },
-            inputTooShort: function(e) {
+            inputTooShort: function (e) {
                 var t = e.minimum - e.input.length,
                     n = "Por favor, introduzca " + t + " car";
                 return t == 1 ? n += "ácter" : n += "acteres", n;
             },
-            loadingMore: function() {
+            loadingMore: function () {
                 return "Cargando más resultados…";
             },
-            maximumSelected: function(e) {
+            maximumSelected: function (e) {
                 var t = "Sólo puede seleccionar " + e.maximum + " elemento";
                 return e.maximum != 1 && (t += "s"), t;
             },
-            noResults: function() {
+            noResults: function () {
                 return "No se encontraron resultados";
             },
-            searching: function() {
+            searching: function () {
                 return "Buscando…";
             }
         }
@@ -101,6 +101,11 @@ function admData() {
     self.fechaFinal = ko.observable();
     self.dHora = ko.observable();
     self.hHora = ko.observable();
+    //
+    self.linea1 = ko.observable();
+    self.linea2 = ko.observable();
+    self.linea3 = ko.observable();
+    self.firmante = ko.observable();
 }
 
 
@@ -141,11 +146,11 @@ function datosOK() {
             }
         },
         // Do not change code below
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             error.insertAfter(element.parent());
         }
     });
-    $.validator.methods.date = function(value, element) {
+    $.validator.methods.date = function (value, element) {
         return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
     }
     var opciones = $("#frmInforme").validate().settings;
@@ -158,7 +163,7 @@ function datosOK() {
 }
 
 function aceptar() {
-    var mf = function() {
+    var mf = function () {
         if (!datosOK())
             return;
         // control de fechas 
@@ -188,7 +193,7 @@ function aceptar() {
             url: url,
             dataType: "json",
             contentType: "application/json",
-            success: function(data, status) {
+            success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
                 // vm.asignaciones(data);
                 if (data.puntos.length == 0) {
@@ -209,6 +214,11 @@ function informePDF(data) {
     if ($('#chkObservaciones').prop('checked')) {
         shortid = "NyJ4YRbbl";
     }
+    // incluir las nuevas líneas
+    data.linea1 = vm.linea1();
+    data.linea2 = vm.linea2();
+    data.linea3 = vm.linea3();
+    data.firmante = vm.firmante();
     var data = {
         "template": {
             "shortid": shortid
@@ -218,7 +228,7 @@ function informePDF(data) {
     f_open_post("POST", myconfig.reportUrl + "/api/report", data);
 }
 
-var f_open_post = function(verb, url, data, target) {
+var f_open_post = function (verb, url, data, target) {
     var form = document.createElement("form");
     form.action = url;
     form.method = verb;
@@ -247,7 +257,7 @@ var f_open_post = function(verb, url, data, target) {
 };
 
 function salir() {
-    var mf = function() {
+    var mf = function () {
         var url = "InfTerminalRonda.html";
         window.open(url, '_self');
     }
@@ -260,7 +270,7 @@ function loadPosiblesPuntos() {
         url: myconfig.apiUrl + "/api/puntos",
         dataType: "json",
         contentType: "application/json",
-        success: function(data, status) {
+        success: function (data, status) {
             // hay que mostrarlo en la zona de datos
             vm.posiblesPuntos(data);
         },

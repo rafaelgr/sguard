@@ -67,6 +67,11 @@ function admData() {
     self.fechaFinal = ko.observable();
     self.dHora = ko.observable();
     self.hHora = ko.observable();
+    //
+    self.linea1 = ko.observable();
+    self.linea2 = ko.observable();
+    self.linea3 = ko.observable();
+    self.firmante = ko.observable();    
 }
 
 
@@ -171,6 +176,11 @@ function informePDF(data) {
     if ($('#chkObservaciones').prop('checked')){
         shortid = "VJbmrHkbx";
     }    
+    // incluir las nuevas líneas
+    data.linea1 = vm.linea1();
+    data.linea2 = vm.linea2();
+    data.linea3 = vm.linea3();
+    data.firmante = vm.firmante();    
     var data = {
         "template": {
             "shortid": shortid
