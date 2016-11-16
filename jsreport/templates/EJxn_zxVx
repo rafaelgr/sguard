@@ -1,0 +1,23 @@
+{
+    "engine": "handlebars",
+    "recipe": "html-to-xlsx",
+    "phantom": {
+        "orientation": "portrait",
+        "format": "A4"
+    },
+    "resources": {
+        "items": []
+    },
+    "data": {
+        "shortid": "V1StuGg4e"
+    },
+    "script": {},
+    "name": "rptInfGeneralExcel",
+    "content": "<meta charset=\"utf-8\">\n<!-- #CSS Links -->\n<!--\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css\">\n-->\n<link rel=\"stylesheet\" href=\"http://localhost:9000/ficheros/css/bootstrap.min.css\">\n<img src='{#image FalckSCI-logo-web}' style=\"display:none;\"/>\n<div>\n    <table class=\"table table-stripped table-forum\">\n        <thead class=\"txt-color-blue\">\n            <tr>\n                <th>Ronda</th>\n                <th>Fecha ronda</th>\n                <th>Hora ronda</th>\n                <th>Resultado ronda</th>\n                <th>Validada</th>\n                <th>Obs. validacion</th>\n                <th>Terminal</th>\n                <th>Vigilante</th>\n                <th>Orden</th>\n                <th>Orden leido</th>\n                <th>Punto</th>\n                <th>Grupo</th>\n                <th>Edificio</th>\n                <th>Cota</th>\n                <th>Cubiculo</th>\n                <th>Fecha lectura</th>\n                <th>Hora lectura</th>\n                <th>Resultado lectura</th>\n                <th>Incidencia</th>\n                <th>Observaciones</th>\n            </tr>\n        </thead>\n        <tbody>\n            {{#each datos}}\n            <tr>\n                <td>{{ronda}}</td>\n                <td>{{fechar}}</td>\n                <td>{{horar}}</td>\n                <td>{{resultador}}</td>\n                <td>{{validada}}</td>\n                <td>{{obsvalida}}</td>\n                <td>{{terminal}}</td>\n                <td>{{vigilante}}</td>\n                <td>{{orden}}</td>\n                <td>{{ordenleido}}</td>\n                <td>{{punto}}</td>\n                <td>{{grupo}}</td>\n                <td>{{edificio}}</td>\n                <td>{{cota}}</td>\n                <td>{{cubiculo}}</td>\n                <td>{{fechap}}</td>\n                <td>{{horap}}</td>\n                <td>{{resultadop}}</td>\n                <td>{{incidencia}}</td>\n                <td>{{observaciones}}</td>\n            </tr>\n            {{/each}}\n        </tbody>\n    </table>            \n</div>",
+    "shortid": "EJxn_zxVx",
+    "modificationDate": {
+        "$$date": 1458035338642
+    },
+    "_id": "N5JSOlmE13HMAlq1",
+    "version": null
+}

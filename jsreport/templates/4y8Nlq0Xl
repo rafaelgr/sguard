@@ -1,0 +1,31 @@
+{
+    "engine": "handlebars",
+    "recipe": "phantom-pdf",
+    "phantom": {
+        "orientation": "portrait",
+        "format": "A4",
+        "header": "<div style=\"padding-bottom:2px;\">\n\t<img src='{#image FalckSCI-logo-web}' style=\"height:50px;\"/>\n</div>",
+        "headerHeight": "2 cm",
+        "footer": "<div style='text-align:center'>{#pageNum}</div>"
+    },
+    "resources": {
+        "items": []
+    },
+    "data": {
+        "shortid": "NyGhCFAXx"
+    },
+    "script": {},
+    "name": "rptRondaTemplate",
+    "content": "<meta charset=\"utf-8\">\n<!-- #CSS Links -->\n<!--\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css\">\n-->\n<link rel=\"stylesheet\" href=\"http://localhost:9000/ficheros/css/bootstrap.min.css\">\n<img src='{#image FalckSCI-logo-web}' style=\"display:none;\"/>\n<div class=\"well\">\n    <div style=\"text-align:right;\">\n        <h1>{{ninforme}}</h1>\n        <h3>{{ronda}}</h3>\n    </div>\n    <table class=\"table table-stripped table-forum\">\n        <thead class=\"txt-color-blue\">\n            <tr>\n                <th>Orden</th>\n                <th>Punto</th>\n                <th>Cubiculo</th>\n                <th>Zona fuego</th>\n                <th>Grupo</th>\n                <th>Edificio</th>\n                <th>Cota</th>\n            </tr>\n        </thead>\n        <tbody>\n            {{#each puntos}}\n            <tr>\n                <td>{{orden}}</td>\n                <td>{{punto}}</td>\n                <td>{{cubiculo}}</td>\n                <td>{{zonaFuego}}</td>\n                <td>{{grupo}}</td>\n                <td>{{edificio}}</td>\n                <td>{{cota}}</td>\n            </tr>\n            {{/each}}\n        </tbody>\n    </table>            \n</div>",
+    "shortid": "4y8Nlq0Xl",
+    "modificationDate": {
+        "$$date": 1470128167707
+    },
+    "_id": "lhFNK8NBbeTGTtxa",
+    "@odata": {
+        "context": "https://localhost:8443/odata/$metadata#templates/$entity",
+        "editLink": "https://localhost:8443/odatatemplates/('lhFNK8NBbeTGTtxa')",
+        "id": "https://localhost:8443/odatatemplates/('lhFNK8NBbeTGTtxa')"
+    },
+    "version": null
+}

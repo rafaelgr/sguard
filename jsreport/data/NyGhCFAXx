@@ -1,0 +1,10 @@
+{
+    "name": "datRondaTemplate",
+    "dataJson": "{\n    \"ninforme\":\"Plantilla de Ronda\",\n    \"ronda\": \"Ronda de ejemplo\",\n    \"linea1\": \"Primera Linea\",\n    \"linea2\": \"Segunda Linea\",\n    \"linea3\": \"Tercera Linea\",\n    \"firmante\": \"EL firmante\",\n    \"puntos\":[\n            {\n                \"orden\": \"1\",\n                \"grupo\": \"G1\",\n                \"edificio\": \"Edificio 1\",\n                \"cota\": \"Esta es mi cota\",\n                \"cubiculo\":\"Mi cubo\",\n                \"punto\": \"Mira que texto más grande\",\n                \"zonaFuego\": \"Fuego 1\"\n            },\n            {\n                \"orden\": \"2\",\n                \"grupo\": \"G1\",\n                \"edificio\": \"Edificio 1\",\n                \"cota\": \"Esta es mi cota\",\n                \"cubiculo\":\"Mi cubo\",\n                \"punto\": \"Mira que texto más grande\",\n                \"zonaFuego\": \"Fuego 2\"\n            }\n\n        ]\n}",
+    "shortid": "NyGhCFAXx",
+    "creationDate": "2015-11-25T11:46:25.000Z",
+    "modificationDate": {
+        "$$date": 1479294681392
+    },
+    "_id": "G7Uz2qqIMifCXMKf"
+}
