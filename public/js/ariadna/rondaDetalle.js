@@ -659,7 +659,7 @@ function informePDF(data) {
     data.linea2 = vm.linea2();
     data.linea3 = vm.linea3();
     data.firmante = vm.firmante();
-    data.fechaInforme = moment(new Date()).format('DD/MM/YYYY');
+    data.fechaInforme = moment(new Date()).format('DD/MM/YYYY hh:mm');
     var data = {
         "template": {
             "shortid": "4y8Nlq0Xl"
