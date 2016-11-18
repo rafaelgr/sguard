@@ -33,10 +33,10 @@ function initForm() {
     $("#btnTag").click(tag());
     $("#btnTagf").click(tagf());
 
-    $("#frmRonda").submit(function() {
+    $("#frmRonda").submit(function () {
         return false;
     });
-    $("#frmRondaPuntos").submit(function() {
+    $("#frmRondaPuntos").submit(function () {
         return false;
     });
 
@@ -56,16 +56,16 @@ function initForm() {
     rondId = gup('RondaId');
     if (rondId != 0) {
         var data = {
-                rondaId: rondId
-            }
-            // hay que buscar ese elemento en concreto
+            rondaId: rondId
+        }
+        // hay que buscar ese elemento en concreto
         $.ajax({
             type: "GET",
             url: myconfig.apiUrl + "/api/rondas/detalle/" + rondId,
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function(data, status) {
+            success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
                 loadData(data);
             },
@@ -101,6 +101,12 @@ function admData() {
 
     // -- del from de punto
     self.orden = ko.observable();
+
+    //
+    self.linea1 = ko.observable();
+    self.linea2 = ko.observable();
+    self.linea3 = ko.observable();
+    self.firmante = ko.observable();
 }
 
 function loadData(data) {
@@ -124,7 +130,7 @@ function loadPosiblesPuntos(id, edificioId) {
             url: myconfig.apiUrl + "/api/puntos/edificios/" + edificioId,
             dataType: "json",
             contentType: "application/json",
-            success: function(data, status) {
+            success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
                 vm.posiblesPuntos(data);
             },
@@ -136,7 +142,7 @@ function loadPosiblesPuntos(id, edificioId) {
             url: myconfig.apiUrl + "/api/puntos",
             dataType: "json",
             contentType: "application/json",
-            success: function(data, status) {
+            success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
                 vm.posiblesPuntos(data);
                 for (var i = 0; i < data.length; i++) {
@@ -156,7 +162,7 @@ function loadPosiblesGrupos(id) {
         url: myconfig.apiUrl + "/api/grupos",
         dataType: "json",
         contentType: "application/json",
-        success: function(data, status) {
+        success: function (data, status) {
             // hay que mostrarlo en la zona de datos
             vm.posiblesGrupos(data);
             if (id) {
@@ -179,7 +185,7 @@ function loadPosiblesEdificios(id, grupoId) {
             url: myconfig.apiUrl + "/api/edificios/grupos/" + grupoId,
             dataType: "json",
             contentType: "application/json",
-            success: function(data, status) {
+            success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
                 vm.posiblesEdificios(data);
             },
@@ -191,7 +197,7 @@ function loadPosiblesEdificios(id, grupoId) {
             url: myconfig.apiUrl + "/api/edificios",
             dataType: "json",
             contentType: "application/json",
-            success: function(data, status) {
+            success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
                 vm.posiblesEdificios(data);
                 if (id) {
@@ -208,14 +214,14 @@ function loadPosiblesEdificios(id, grupoId) {
 }
 
 function cambioGrupo() {
-    var mf = function() {
+    var mf = function () {
         loadPosiblesEdificios(0, vm.grupo().grupoId);
     }
     return mf;
 }
 
 function cambioEdificio() {
-    var mf = function() {
+    var mf = function () {
         loadPosiblesPuntos(0, vm.edificio().edificioId);
     }
     return mf;
@@ -247,7 +253,7 @@ function prepareValidateRondaPuntos() {
         },
 
         // Do not change code below
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             error.insertAfter(element.parent());
         }
     };
@@ -267,16 +273,16 @@ function rondaPuntosOk() {
 function initTablaPuntos() {
     tablaCarro = $('#dt_rondapuntos').dataTable({
         autoWidth: true,
-        preDrawCallback: function() {
+        preDrawCallback: function () {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_rondapuntos'), breakpointDefinition);
             }
         },
-        rowCallback: function(nRow) {
+        rowCallback: function (nRow) {
             responsiveHelper_dt_basic.createExpandIcon(nRow);
         },
-        drawCallback: function(oSettings) {
+        drawCallback: function (oSettings) {
             responsiveHelper_dt_basic.respond();
         },
         language: {
@@ -306,7 +312,7 @@ function initTablaPuntos() {
             data: "nombre"
         }, {
             data: "rondaPuntoId",
-            render: function(data, type, row) {
+            render: function (data, type, row) {
                 var bt1 = "<button class='btn btn-circle btn-danger btn-lg' onclick='deletePuntoRonda(";
                 bt1 += data + ", " + row.rondaId + "," + row.orden + ");'";
                 bt1 += " title='Eliminar registro'> <i class='fa fa-trash-o fa-fw'></i> </button>";
@@ -338,7 +344,7 @@ function deletePuntoRonda(id, rondaId, orden) {
         title: "<i class='fa fa-info'></i> Mensaje",
         content: mens,
         buttons: '[Aceptar][Cancelar]'
-    }, function(ButtonPressed) {
+    }, function (ButtonPressed) {
         if (ButtonPressed === "Aceptar") {
             var data = {
                 objetivoId: id
@@ -349,7 +355,7 @@ function deletePuntoRonda(id, rondaId, orden) {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function(data, status) {
+                success: function (data, status) {
                     // -- hay que ver como recargar la tabla
                     refrescarTablaPuntos(vm.rondaId())
                 },
@@ -396,7 +402,7 @@ function datosOK() {
             }
         },
         // Do not change code below
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             error.insertAfter(element.parent());
         }
     });
@@ -404,7 +410,7 @@ function datosOK() {
 }
 
 function aceptar() {
-    var mf = function() {
+    var mf = function () {
         if (!datosOK())
             return;
         var data = {
@@ -428,7 +434,7 @@ function aceptar() {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function(data, status) {
+                success: function (data, status) {
                     // Recargamos para que pueda meter puntos
                     var url = "RondaDetalle.html?RondaId=" + data.rondaId;
                     window.open(url, '_self');
@@ -442,7 +448,7 @@ function aceptar() {
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function(data, status) {
+                success: function (data, status) {
                     // Nos volvemos al general
                     var url = "RondaGeneral.html?RondaId=" + vm.rondaId();
                     window.open(url, '_self');
@@ -455,7 +461,7 @@ function aceptar() {
 }
 
 function salir() {
-    var mf = function() {
+    var mf = function () {
         var url = "RondaGeneral.html";
         window.open(url, '_self');
     }
@@ -463,7 +469,7 @@ function salir() {
 }
 
 function agregarPunto() {
-    var mf = function() {
+    var mf = function () {
         if (!rondaPuntosOk()) return;
         // primero verificamos si ya hay un punto con ese orden
         $.ajax({
@@ -471,7 +477,7 @@ function agregarPunto() {
             url: myconfig.apiUrl + "/api/rondas/puntos/" + rondId + "/" + vm.orden(),
             dataType: "json",
             contentType: "application/json",
-            success: function(data, status) {
+            success: function (data, status) {
                 if (data == null) {
                     agregarPuntoRonda();
                 } else {
@@ -482,7 +488,7 @@ function agregarPunto() {
                         title: "<i class='fa fa-info'></i> Mensaje",
                         content: mens,
                         buttons: '[Aceptar][Cancelar]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Aceptar") {
                             agregarPuntoRonda();
                         }
@@ -496,7 +502,7 @@ function agregarPunto() {
     return mf;
 }
 
-agregarPuntoRonda = function() {
+agregarPuntoRonda = function () {
     data = {
         puntoRonda: {
             rondaId: rondId,
@@ -510,7 +516,7 @@ agregarPuntoRonda = function() {
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function(data, status) {
+        success: function (data, status) {
             // hay que mostrarlo en la zona de datos
             // solucion brutal (hay que cambiarla)
             refrescarTablaPuntos(vm.rondaId());
@@ -527,7 +533,7 @@ function refrescarTablaPuntos(id) {
         url: myconfig.apiUrl + "/api/rondas/detalle/" + id,
         dataType: "json",
         contentType: "application/json",
-        success: function(data, status) {
+        success: function (data, status) {
             // refresca tabla
             loadTablaPuntos(data.puntos);
         },
@@ -536,7 +542,7 @@ function refrescarTablaPuntos(id) {
 }
 
 function tag() {
-    var mf = function() {
+    var mf = function () {
         var mens = "Para la leer la etiqueta con el terminal, páselo por él hasta que la luz parpadee, luego pulse 'ACEPTAR'.";
         mens += "<br/> IMPORTANTE: Este proceso borra los datos en el terminal, si tiene rondas pendientes descárgelas antes.";
 
@@ -544,7 +550,7 @@ function tag() {
             title: "<i class='fa fa-info'></i> Mensaje",
             content: mens,
             buttons: '[Aceptar][Cancelar]'
-        }, function(ButtonPressed) {
+        }, function (ButtonPressed) {
             if (ButtonPressed === "Aceptar") {
                 $("#btnTag").addClass('fa-spin');
                 $.ajax({
@@ -552,7 +558,7 @@ function tag() {
                     url: myconfig.apiUrl + "/api/terminal/records",
                     dataType: "json",
                     contentType: "application/json",
-                    success: function(data, status) {
+                    success: function (data, status) {
                         if (data.length == 0) {
                             mostrarMensajeSmart('No hay datos para leer');
                             $("#btnTag").removeClass('fa-spin');
@@ -565,7 +571,7 @@ function tag() {
                                 url: myconfig.apiUrl + "/api/terminal/records",
                                 dataType: "json",
                                 contentType: "application/json",
-                                success: function(data, status) {},
+                                success: function (data, status) { },
                                 error: errorAjax
                             });
                         }
@@ -580,7 +586,7 @@ function tag() {
 
 
 function tagf() {
-    var mf = function() {
+    var mf = function () {
         var mens = "Para la leer la etiqueta con el terminal, páselo por él hasta que la luz parpadee, luego pulse 'ACEPTAR'.";
         mens += "<br/> IMPORTANTE: Este proceso borra los datos en el terminal, si tiene rondas pendientes descárgelas antes.";
 
@@ -588,7 +594,7 @@ function tagf() {
             title: "<i class='fa fa-info'></i> Mensaje",
             content: mens,
             buttons: '[Aceptar][Cancelar]'
-        }, function(ButtonPressed) {
+        }, function (ButtonPressed) {
             if (ButtonPressed === "Aceptar") {
                 $("#btnTagf").addClass('fa-spin');
                 $.ajax({
@@ -596,7 +602,7 @@ function tagf() {
                     url: myconfig.apiUrl + "/api/terminal/records",
                     dataType: "json",
                     contentType: "application/json",
-                    success: function(data, status) {
+                    success: function (data, status) {
                         if (data.length == 0) {
                             mostrarMensajeSmart('No hay datos para leer');
                             $("#btnTagf").removeClass('fa-spin');
@@ -609,7 +615,7 @@ function tagf() {
                                 url: myconfig.apiUrl + "/api/terminal/records",
                                 dataType: "json",
                                 contentType: "application/json",
-                                success: function(data, status) {},
+                                success: function (data, status) { },
                                 error: errorAjax
                             });
                         }
@@ -624,14 +630,14 @@ function tagf() {
 
 
 function aceptarPDF() {
-    var mf = function() {
+    var mf = function () {
 
         $.ajax({
             type: "GET",
             url: myconfig.apiUrl + "/api/informes/rondas/plantilla/?rondaId=" + vm.rondaId(),
             dataType: "json",
             contentType: "application/json",
-            success: function(data, status) {
+            success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
                 // vm.asignaciones(data);
                 if (data.puntos.length == 0) {
@@ -648,6 +654,12 @@ function aceptarPDF() {
 }
 
 function informePDF(data) {
+    // incluir las nuevas líneas
+    data.linea1 = vm.linea1();
+    data.linea2 = vm.linea2();
+    data.linea3 = vm.linea3();
+    data.firmante = vm.firmante();
+    data.fechaInforme = moment(new Date()).format('DD/MM/YYYY');
     var data = {
         "template": {
             "shortid": "4y8Nlq0Xl"
@@ -657,7 +669,7 @@ function informePDF(data) {
     f_open_post("POST", myconfig.reportUrl + "/api/report", data);
 }
 
-var f_open_post = function(verb, url, data, target) {
+var f_open_post = function (verb, url, data, target) {
     var form = document.createElement("form");
     form.action = url;
     form.method = verb;
