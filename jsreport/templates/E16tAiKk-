@@ -4,7 +4,7 @@
     "phantom": {
         "orientation": "portrait",
         "format": "A4",
-        "header": "<div style=\"padding-bottom:2px;float:left;\">\n\t<img src='{#image FalckSCI-logo-web}' style=\"height:50px;\"/>\n</div>\n<div style=\"float:right; line-height: 0.5;font-family: \"Arial\">\n\t<div style=\"text-align:right;\">\n\t\t<p>{{linea1}}</p>\n\t\t<p>{{linea2}}</p>\n\t\t<p>{{linea3}}</p>\n\t<div>\n</div>",
+        "header": "<div style=\"padding-bottom:2px;float:left;\">\n\t<img src='{#image FalckSCI-logo-web}' style=\"height:50px;\"/>\n</div>\n<div style=\"float:right; line-height: 0.5;font-family: \"Arial\">\n\t<div style=\"text-align:right;padding:1px;\">\n\t\t<p>{{linea1}}</p>\n\t\t<p>{{linea2}}</p>\n\t\t<p>{{linea3}}</p>\n\t<div>\n</div>",
         "headerHeight": "2.5 cm",
         "footer": "<div style='text-align:center'>{#pageNum}</div>"
     },
@@ -12,13 +12,13 @@
         "items": []
     },
     "data": {
-        "shortid": "Ek3ivR-We"
+        "shortid": "NyShWWy-l"
     },
     "script": {},
     "name": "infPuntoRonda2",
     "shortid": "E16tAiKk-",
     "modificationDate": {
-        "$$date": 1479315778603
+        "$$date": 1480326843681
     },
     "_id": "VOdbGE6JKolukgix",
     "version": null,

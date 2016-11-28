@@ -4,7 +4,7 @@
     "phantom": {
         "orientation": "portrait",
         "format": "A4",
-        "header": "<div style=\"padding-bottom:2px;float:left;\">\n\t<img src='{#image FalckSCI-logo-web}' style=\"height:50px;\"/>\n</div>\n<div style=\"float:right; line-height: 0.5;font-family: \"Arial\">\n\t<div style=\"text-align:right;\">\n\t\t<p>{{linea1}}</p>\n\t\t<p>{{linea2}}</p>\n\t\t<p>{{linea3}}</p>\n\t<div>\n</div>",
+        "header": "<div style=\"padding-bottom:2px;float:left;\">\n\t<img src='{#image FalckSCI-logo-web}' style=\"height:50px;\"/>\n</div>\n<div style=\"float:right; line-height: 0.5;font-family: \"Arial\">\n\t<div style=\"text-align:right;padding:1px;\">\n\t\t<p>{{linea1}}</p>\n\t\t<p>{{linea2}}</p>\n\t\t<p>{{linea3}}</p>\n\t<div>\n</div>",
         "headerHeight": "2.5 cm",
         "footer": "<div style='text-align:center'>{#pageNum}</div>"
     },
@@ -18,7 +18,7 @@
     "name": "infRondas2",
     "shortid": "4k9az9KJ-",
     "modificationDate": {
-        "$$date": 1479315962190
+        "$$date": 1480329079606
     },
     "_id": "bMe6hQGwo5ZQCDjB",
     "version": null,
