@@ -26,7 +26,8 @@ function initForm() {
     ko.applyBindings(vm);
     // asignación de eventos al clic
     $("#btnSalir").click(salir());
-    $("#frmDescarga").submit(function() {
+    $("#btnProcesar").click(procesarDescarga());
+    $("#frmDescarga").submit(function () {
         return false;
     });
 
@@ -37,16 +38,16 @@ function initForm() {
     rondId = gup('DescargaRealizadaId');
     if (rondId != 0) {
         var data = {
-                rondaId: rondId
-            }
-            // hay que buscar ese elemento en concreto
+            rondaId: rondId
+        }
+        // hay que buscar ese elemento en concreto
         $.ajax({
             type: "GET",
             url: myconfig.apiUrl + "/api/descargas/leer-descarga/" + rondId,
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function(data, status) {
+            success: function (data, status) {
                 // hay que mostrarlo en la zona de datos
                 loadData(data);
             },
@@ -64,14 +65,20 @@ function admData() {
     self.fecha = ko.observable();
     self.hora = ko.observable();
     self.terminal = ko.observable();
+    self.procesada = ko.observable();
 }
 
 function loadData(data) {
     vm.numero(data.cabecera.descargaId);
-    vm.fecha(moment(data.cabecera.fecha).format('DD/MM/YYYY'));    
+    vm.fecha(moment(data.cabecera.fecha).format('DD/MM/YYYY'));
     vm.hora(data.cabecera.hora);
     vm.terminal(data.cabecera.nterminal);
+    vm.procesada(data.cabecera.procesada);
     loadTablaPuntos(data.lecturas);
+    // ocultamos el botón de procesamiento si ya está procesada
+    if (vm.procesada() == 1) {
+        $('#btnProcesar').hide();
+    }
 }
 
 
@@ -82,19 +89,19 @@ function initTablaPuntos() {
             [0, "desc"],
             [1, "desc"]
         ],
-        preDrawCallback: function() {
+        preDrawCallback: function () {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper_dt_basic) {
                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_rondapuntos'), breakpointDefinition);
             }
         },
-        rowCallback: function(nRow) {
+        rowCallback: function (nRow) {
             responsiveHelper_dt_basic.createExpandIcon(nRow);
         },
-        drawCallback: function(oSettings) {
+        drawCallback: function (oSettings) {
             responsiveHelper_dt_basic.respond();
         },
-        fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+        fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
 
         },
         language: {
@@ -122,7 +129,7 @@ function initTablaPuntos() {
             data: "tag"
         }, {
             data: "fecha",
-            render: function(data, type, row) {
+            render: function (data, type, row) {
                 if (!data) {
                     return "";
                 }
@@ -154,7 +161,7 @@ function loadTablaPuntos(data) {
 
 
 function salir() {
-    var mf = function() {
+    var mf = function () {
         var url = "GestionDescarga.html";
         window.open(url, '_self');
     }
@@ -163,7 +170,7 @@ function salir() {
 
 
 function aceptar() {
-    var mf = function() {
+    var mf = function () {
         // solo se puede cambiar el check de validación y las observaciones
         var fecha = moment(vm.fecha(), "DD/MM/YYYY").format('YYYY-MM-DD');
         var data = {
@@ -181,13 +188,21 @@ function aceptar() {
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function(data, status) {
+            success: function (data, status) {
                 // Nos volvemos al general
                 var url = "GestionDescarga.html?rondaRealizadaId=" + rondId;
                 window.open(url, '_self');
             },
             error: errorAjax
         });
+    };
+    return mf;
+}
+
+function procesarDescarga() {
+    var mf = function () {
+        var url = "GestionRondaNueva.html?descargaId=" + rondId;
+        window.open(url, '_self');;
     };
     return mf;
 }

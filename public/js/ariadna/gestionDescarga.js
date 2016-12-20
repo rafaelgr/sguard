@@ -74,7 +74,9 @@ function initTablaDescargas() {
             responsiveHelper_dt_basic.respond();
         },
         fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-
+            if (aData.procesada != 1) {
+                $(nRow).css('color', 'red')
+            }
         },
         language: {
             processing: "Procesando...",
@@ -98,6 +100,8 @@ function initTablaDescargas() {
         },
         data: dataDescargas,
         columns: [{
+            data: "procesada"
+        },{
             data: "descargaId"
         },{
             data: "nterminal"
