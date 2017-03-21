@@ -1,6 +1,6 @@
 {
   "name": "sguard",
-  "version": "2.6.8",
+  "version": "2.6.9",
   "description": "Server and API for SGUARD application",
   "main": "index.js",
   "scripts": {
@@ -28,12 +28,12 @@
     "body-parser": "^1.14.0",
     "connect": "^3.4.0",
     "cors": "^2.7.1",
-    "edge": "^4.0.0",
+    "edge": "^6.5.1",
     "express": "^4.13.3",
     "formidable": "^1.0.17",
     "moment": "^2.10.6",
     "multer": "^1.1.0",
-    "mysql": "^2.0.0",
+    "mysql": "^2.13.0",
     "serve-index": "^1.7.2"
   }
 }
