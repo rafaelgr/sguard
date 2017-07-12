@@ -86,6 +86,7 @@ function admData() {
     self.fechaAlta = ko.observable();
     self.fechaBaja = ko.observable();
     self.observaciones = ko.observable();
+    self.tagHexa = ko.observable();
 }
 
 function loadData(data) {
@@ -97,6 +98,7 @@ function loadData(data) {
         vm.fechaBaja(moment(data.fechaBaja).format("DD/MM/YYYY"));
     }
     vm.observaciones(data.observaciones);
+    vm.tagHexa(data.tagHexa);
 }
 
 function datosOK() {
@@ -164,7 +166,8 @@ function aceptar() {
                 "nombre": vm.nombre(),
                 "observaciones": vm.observaciones(),
                 "fechaAlta": fecha1,
-                "fechaBaja": fecha2
+                "fechaBaja": fecha2,
+                "tagHexa": vm.tagHexa()
             }
         };
         if (adminId == 0) {
