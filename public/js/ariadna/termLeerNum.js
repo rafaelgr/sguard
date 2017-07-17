@@ -54,19 +54,19 @@ function buscarAdministradores() {
     return mf;
 }
 
-var leerNumeroTerminal = function(){
+var leerNumeroTerminal = function () {
     var btnAceptar = $('#btnAceptar');
     btnAceptar.addClass('fa-spin');
     $.ajax({
-            type: "GET",
-            url: myconfig.apiUrl + "/api/terminal/read-terminal-number",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (data, status) {
-                $('#txtRespuesta').val(data);
-                btnAceptar.removeClass('fa-spin');
-            },
-            error: errorAjax
-        });
+        type: "GET",
+        url: myconfig.apiUrl + "/api/terminal/read-terminal-number",
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data, status) {
+            $('#txtRespuesta').val(data);
+            btnAceptar.removeClass('fa-spin');
+        },
+        error: errorAjax
+    });
 };
 
