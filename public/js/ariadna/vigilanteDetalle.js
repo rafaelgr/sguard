@@ -148,7 +148,7 @@ function salir() {
 
 
 function tag() {
-    var mf = function() {
+    var mf = function () {
         var mens = "Para la leer la etiqueta con el terminal, páselo por él hasta que la luz parpadee, luego pulse 'ACEPTAR'.";
         mens += "<br/> IMPORTANTE: Este proceso borra los datos en el terminal, si tiene rondas pendientes descárgelas antes.";
 
@@ -156,33 +156,49 @@ function tag() {
             title: "<i class='fa fa-info'></i> Mensaje",
             content: mens,
             buttons: '[Aceptar][Cancelar]'
-        }, function(ButtonPressed) {
+        }, function (ButtonPressed) {
             if (ButtonPressed === "Aceptar") {
                 $("#btnTag").addClass('fa-spin');
-                $.ajax({
-                    type: "GET",
-                    url: myconfig.apiUrl + "/api/terminal/records",
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function(data, status) {
-                        if (data.length == 0) {
-                            mostrarMensajeSmart('No hay datos para leer');
-                            $("#btnTag").removeClass('fa-spin');
-                        } else {
-                            var lectura = data[data.length - 1];
-                            vm.tag(lectura.tag);
-                            $("#btnTag").removeClass('fa-spin');
-                            $.ajax({
-                                type: "DELETE",
-                                url: myconfig.apiUrl + "/api/terminal/records",
-                                dataType: "json",
-                                contentType: "application/json",
-                                success: function(data, status) {},
-                                error: errorAjax
-                            });
-                        }
-                    },
-                    error: errorAjax
+                // -- leer previamente el terminal
+                leerNumeroTerminalAmpliado(function (err, term) {
+                    if (err) {
+                        mostrarMensajeSmart(err.message);
+                        $("#btnTag").removeClass('fa-spin');
+                        return;
+                    }
+                    if (!term) {
+                        mostrarMensajeSmart("El terminal no está dado de alta en la base de datos");
+                        $("#btnTag").removeClass('fa-spin');
+                        return;
+                    }
+                    var tagHexa = term.tagHexa;
+                    $.ajax({
+                        type: "GET",
+                        url: myconfig.apiUrl + "/api/terminal/records",
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (data, status) {
+                            if (data.length == 0) {
+                                mostrarMensajeSmart('No hay datos para leer');
+                                $("#btnTag").removeClass('fa-spin');
+                            } else {
+                                var lectura = data[data.length - 1];
+                                var tag = lectura.tag;
+                                if (tagHexa) tag = convTagHexa(tag);
+                                vm.tag(tag);
+                                $("#btnTag").removeClass('fa-spin');
+                                $.ajax({
+                                    type: "DELETE",
+                                    url: myconfig.apiUrl + "/api/terminal/records",
+                                    dataType: "json",
+                                    contentType: "application/json",
+                                    success: function (data, status) { },
+                                    error: errorAjax
+                                });
+                            }
+                        },
+                        error: errorAjax
+                    });
                 });
             }
         });
@@ -190,9 +206,8 @@ function tag() {
     return mf;
 }
 
-
 function tagf() {
-    var mf = function() {
+    var mf = function () {
         var mens = "Para la leer la etiqueta con el terminal, páselo por él hasta que la luz parpadee, luego pulse 'ACEPTAR'.";
         mens += "<br/> IMPORTANTE: Este proceso borra los datos en el terminal, si tiene rondas pendientes descárgelas antes.";
 
@@ -200,36 +215,92 @@ function tagf() {
             title: "<i class='fa fa-info'></i> Mensaje",
             content: mens,
             buttons: '[Aceptar][Cancelar]'
-        }, function(ButtonPressed) {
+        }, function (ButtonPressed) {
             if (ButtonPressed === "Aceptar") {
                 $("#btnTagf").addClass('fa-spin');
-                $.ajax({
-                    type: "GET",
-                    url: myconfig.apiUrl + "/api/terminal/records",
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function(data, status) {
-                        if (data.length == 0) {
-                            mostrarMensajeSmart('No hay datos para leer');
-                            $("#btnTagf").removeClass('fa-spin');
-                        } else {
-                            var lectura = data[data.length - 1];
-                            vm.tagf(lectura.tag);
-                            $("#btnTagf").removeClass('fa-spin');
-                            $.ajax({
-                                type: "DELETE",
-                                url: myconfig.apiUrl + "/api/terminal/records",
-                                dataType: "json",
-                                contentType: "application/json",
-                                success: function(data, status) {},
-                                error: errorAjax
-                            });
-                        }
-                    },
-                    error: errorAjax
+                // -- leer previamente el terminal
+                leerNumeroTerminalAmpliado(function (err, term) {
+                    if (err) {
+                        mostrarMensajeSmart(err.message);
+                        $("#btnTagf").removeClass('fa-spin');
+                        return;
+                    }
+                    if (!term) {
+                        mostrarMensajeSmart("El terminal no está dado de alta en la base de datos");
+                        $("#btnTagf").removeClass('fa-spin');
+                        return;
+                    }
+                    var tagHexa = term.tagHexa;
+                    $.ajax({
+                        type: "GET",
+                        url: myconfig.apiUrl + "/api/terminal/records",
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (data, status) {
+                            if (data.length == 0) {
+                                mostrarMensajeSmart('No hay datos para leer');
+                                $("#btnTagf").removeClass('fa-spin');
+                            } else {
+                                var lectura = data[data.length - 1];
+                                var tag = lectura.tag;
+                                if (tagHexa) tag = convTagHexa(tag);
+                                vm.tagf(tag);
+                                $("#btnTagf").removeClass('fa-spin');
+                                $.ajax({
+                                    type: "DELETE",
+                                    url: myconfig.apiUrl + "/api/terminal/records",
+                                    dataType: "json",
+                                    contentType: "application/json",
+                                    success: function (data, status) { },
+                                    error: errorAjax
+                                });
+                            }
+                        },
+                        error: errorAjax
+                    });
                 });
             }
         });
     }
     return mf;
+}
+
+var leerNumeroTerminalAmpliado = function (done) {
+    // (1) Leer el número de terminal implicado
+    // /terminal/read-terminal-number
+    $.ajax({
+        type: "GET",
+        url: myconfig.apiUrl + "/api/terminal/read-terminal-number",
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data, status) {
+            var termNum = data;
+            $.ajax({
+                type: "GET",
+                url: myconfig.apiUrl + "/api/terminales/?numero=" + termNum,
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data, status) {
+                    if (data.length == 0) {
+                        done(null, null);
+                    } else {
+                        done(null, data[0]);
+                    }
+                },
+                error: function (err) {
+                    done(new Error(err.responseText));
+                }
+            });
+        },
+        error: function (err) {
+            done(new Error(err.responseText));
+        }
+    });
+}
+
+var convTagHexa = function (tag) {
+    var right8 = tag.substr(tag.length - 8);
+    var tagDecimal = parseInt(right8, 16);
+    var tag10Str = "0000000000" + tagDecimal;
+    return tag10Str.substr(tag10Str.length - 10);
 }

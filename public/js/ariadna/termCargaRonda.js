@@ -33,6 +33,9 @@ function initForm() {
 
 
 var leerDatos = function () {
+    // test -- Eliminar en producción
+    // procesarDescarga(4332);
+    // return;
     var btnAceptar = $('#btnAceptar');
     btnAceptar.addClass('fa-spin');
     $.ajax({
