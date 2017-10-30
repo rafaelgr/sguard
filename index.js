@@ -103,7 +103,16 @@ app.use('/api/uploader', uploader_router);
 
 
 // -- start server
-app.listen(config.apiPort);
+//app.listen(config.apiPort);
+
+// -- start server
+var server = require('http').createServer(app); 
+var io = require('socket.io')(server);
+server.listen(config.apiPort);
+
+// -- io calls
+var ioAPI = require('./lib/ioapi/ioapi');
+ioAPI.init(io);
 
 // -- console message
 console.log ("-------------------------------------------");
