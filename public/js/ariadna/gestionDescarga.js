@@ -126,7 +126,6 @@ function initTablaDescargas() {
 }
 
 function datosOK() {
-    //TODO: Incluir en la validación si el certificado figura en el almacén de certificados.
     $('#frmBuscar').validate({
         rules: {
             txtBuscar: { required: true },
@@ -166,9 +165,10 @@ function buscarDescargas() {
         // obtener el n.serie del certificado para la firma.
         var aBuscar = $('#txtBuscar').val();
         // enviar la consulta por la red (AJAX)
+        var url = myconfig.apiUrl + "/api/descargas/?numero=" + aBuscar;
         $.ajax({
             type: "GET",
-            url: myconfig.apiUrl + "/api/descargas/?numero=" + aBuscar,
+            url: url,
             dataType: "json",
             contentType: "application/json",
             success: function (data, status) {
