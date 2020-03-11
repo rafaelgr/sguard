@@ -215,7 +215,32 @@ function procesarDescarga() {
 
 function corregirDescarga() {
     var mf = function () {
-        console.log('CORREGIR DESCARGA');
+        if (!datosOK()) return;
+        $.ajax({
+            type: "GET",
+            url: myconfig.apiUrl + "/api/descargas/corregir-descarga/" + vm.descargaId(),
+            dataType: "json",
+            contentType: "application/json",
+            success: function(data, status) {
+                $.ajax({
+                    type: "PUT",
+                    url: myconfig.apiUrl + "/api/descargas/",
+                    dataType: "json",
+                    data: {
+                        descargaId: vm.descargaId(),
+                        nterminal: vm.terminal().numero
+                    },
+                    contentType: "application/json",
+                    success: function(data, status) {
+                        // Nos volvemos al general
+                        var url = "GestionDescarga.html?DescargaId=" + vm.descargaId();
+                        window.open(url, '_self');
+                    },
+                    error: errorAjax
+                });
+            },
+            error: errorAjax
+        });
     };
     return mf;
 }
@@ -243,4 +268,25 @@ function loadPosiblesTerminales(numero) {
 
         error: errorAjax
     });
+}
+
+function datosOK() {
+    $('#frmDescarga').validate({
+        rules: {
+            cmbTerminales: {
+                required: true
+            }
+        },
+        // Messages for form validation
+        messages: {
+            cmbTerminales: {
+                required: 'Introduzca el terminal'
+            }
+        },
+        // Do not change code below
+        errorPlacement: function(error, element) {
+            error.insertAfter(element.parent());
+        }
+    });
+    return $('#frmDescarga').valid();
 }
