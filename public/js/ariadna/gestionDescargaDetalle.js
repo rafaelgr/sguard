@@ -175,36 +175,6 @@ function salir() {
 }
 
 
-function aceptar() {
-    var mf = function () {
-        // solo se puede cambiar el check de validación y las observaciones
-        var fecha = moment(vm.fecha(), "DD/MM/YYYY").format('YYYY-MM-DD');
-        var data = {
-            rondaRealizada: {
-                "rondaRealizadaId": rondId,
-                "fecha": fecha,
-                "hora": vm.hora(),
-                "validada": vm.validada(),
-                "obsvalida": vm.obsvalida()
-            }
-        };
-        $.ajax({
-            type: "PUT",
-            url: myconfig.apiUrl + "/api/rondas-realizadas/" + rondId,
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            success: function (data, status) {
-                // Nos volvemos al general
-                var url = "GestionDescarga.html?rondaRealizadaId=" + rondId;
-                window.open(url, '_self');
-            },
-            error: errorAjax
-        });
-    };
-    return mf;
-}
-
 function procesarDescarga() {
     var mf = function () {
         var url = "GestionRondaNueva.html?descargaId=" + rondId;
@@ -257,7 +227,6 @@ function loadPosiblesTerminales(numero) {
             if (numero) {
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].numero == numero) {
-                        vm.terminalCompleto(data[i]);
                         vm.terminal(data[i]);
                         // Si tiene terminal no hay que dar la posibilidad de corregir.
                         $('#btnCorregir').hide();
