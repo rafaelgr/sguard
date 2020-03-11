@@ -1,5 +1,5 @@
 {
-    "apiPort": 9000,
+    "apiPort": 9001,
     "apiHost": "127.0.0.1",
     "cn50sdfExport": "C:\\FalckSci\\sguard\\public\\ficheros\\exportaciones\\",
     "cn50sdfImport": "C:\\FalckSci\\sguard\\public\\ficheros\\importaciones\\",
