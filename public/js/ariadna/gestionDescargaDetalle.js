@@ -27,10 +27,12 @@ function initForm() {
     // asignación de eventos al clic
     $("#btnSalir").click(salir());
     $("#btnProcesar").click(procesarDescarga());
+    $("#btnCorregir").click(corregirDescarga());
     $("#frmDescarga").submit(function () {
         return false;
     });
 
+    loadPosiblesTerminales();
 
     // inicializar la tabla asociada.
     initTablaPuntos();
@@ -66,14 +68,18 @@ function admData() {
     self.hora = ko.observable();
     self.terminal = ko.observable();
     self.procesada = ko.observable();
+    // -- apoyo de combos
+    self.posiblesTerminales = ko.observableArray([]);
+    self.terminalCompleto = ko.observable();
 }
 
 function loadData(data) {
     vm.numero(data.cabecera.descargaId);
     vm.fecha(moment(data.cabecera.fecha).format('DD/MM/YYYY'));
     vm.hora(data.cabecera.hora);
-    vm.terminal(data.cabecera.nterminal);
+    // vm.terminal(data.cabecera.nterminal);
     vm.procesada(data.cabecera.procesada);
+    loadPosiblesTerminales(data.cabecera.nterminal);
     loadTablaPuntos(data.lecturas);
     // ocultamos el botón de procesamiento si ya está procesada
     if (vm.procesada() == 1) {
@@ -205,4 +211,36 @@ function procesarDescarga() {
         window.open(url, '_self');;
     };
     return mf;
+}
+
+function corregirDescarga() {
+    var mf = function () {
+        console.log('CORREGIR DESCARGA');
+    };
+    return mf;
+}
+
+function loadPosiblesTerminales(numero) {
+    $.ajax({
+        type: "GET",
+        url: myconfig.apiUrl + "/api/terminales",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, status) {
+            // hay que mostrarlo en la zona de datos
+            vm.posiblesTerminales(data);
+            if (numero) {
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].numero == numero) {
+                        vm.terminalCompleto(data[i]);
+                        vm.terminal(data[i]);
+                        // Si tiene terminal no hay que dar la posibilidad de corregir.
+                        $('#btnCorregir').hide();
+                    } 
+                }
+            }
+        },
+
+        error: errorAjax
+    });
 }

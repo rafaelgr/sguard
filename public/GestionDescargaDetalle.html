@@ -417,8 +417,8 @@
                                                 </section>
                                                 <section class="col col-md-3">
                                                     <label class="label">Terminal</label>
-                                                    <label class="input">
-                                                        <input id="txtTerminal" name="txtTerminal" type="text" data-bind="value: terminal" />
+                                                    <label class="select">
+                                                        <select id="cmbTerminales" name="cmbTerminales" data-bind="options: posiblesTerminales, optionsText: 'nombre', value: terminal, valueAllowUnset: true"></select><i></i>
                                                     </label>
                                                 </section>
                                                 <section class="col col-md-3">
@@ -437,6 +437,9 @@
                                         </fieldset>
                                         <fieldset>
                                             <div class="pull-right">
+                                                <button id="btnCorregir" title="Corregir descarga" class="btn btn-primary btn-circle btn-lg">
+                                                    <i class="fa fa-lg fa-align-center"></i>
+                                                </button>                                                 
                                                 <button id="btnProcesar" title="Procesar descarga" class="btn btn-primary btn-circle btn-lg">
                                                     <i class="fa fa-lg fa-check-circle-o"></i>
                                                 </button>                                                
