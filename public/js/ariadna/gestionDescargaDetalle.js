@@ -63,6 +63,7 @@ function initForm() {
 
 function admData() {
     var self = this;
+    self.descargaId = ko.observable();
     self.numero = ko.observable();
     self.fecha = ko.observable();
     self.hora = ko.observable();
@@ -74,6 +75,7 @@ function admData() {
 }
 
 function loadData(data) {
+    vm.descargaId(data.cabecera.descargaId);
     vm.numero(data.cabecera.descargaId);
     vm.fecha(moment(data.cabecera.fecha).format('DD/MM/YYYY'));
     vm.hora(data.cabecera.hora);
@@ -185,7 +187,11 @@ function procesarDescarga() {
 
 function corregirDescarga() {
     var mf = function () {
-        if (!datosOK()) return;
+        debugger;
+        if (!vm.terminal()) {
+            datosOK();
+            return;
+        }
         $.ajax({
             type: "GET",
             url: myconfig.apiUrl + "/api/descargas/corregir-descarga/" + vm.descargaId(),
@@ -196,10 +202,10 @@ function corregirDescarga() {
                     type: "PUT",
                     url: myconfig.apiUrl + "/api/descargas/",
                     dataType: "json",
-                    data: {
+                    data: JSON.stringify({
                         descargaId: vm.descargaId(),
                         nterminal: vm.terminal().numero
-                    },
+                    }),
                     contentType: "application/json",
                     success: function(data, status) {
                         // Nos volvemos al general
