@@ -187,7 +187,6 @@ function procesarDescarga() {
 
 function corregirDescarga() {
     var mf = function () {
-        debugger;
         if (!vm.terminal()) {
             datosOK();
             return;
