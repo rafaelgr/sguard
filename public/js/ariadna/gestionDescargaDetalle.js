@@ -203,12 +203,13 @@ function corregirDescarga() {
                     dataType: "json",
                     data: JSON.stringify({
                         descargaId: vm.descargaId(),
-                        nterminal: vm.terminal().numero
+                        nterminal: vm.terminal().numero,
+                        procesada: 0
                     }),
                     contentType: "application/json",
                     success: function(data, status) {
                         // Nos volvemos al general
-                        var url = "GestionDescarga.html?DescargaId=" + vm.descargaId();
+                        var url = "GestionDescargaDetalle.html?DescargaRealizadaId=" + vm.descargaId();
                         window.open(url, '_self');
                     },
                     error: errorAjax

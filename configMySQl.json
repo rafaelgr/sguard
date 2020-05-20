@@ -1,5 +1,5 @@
 {
-    "host": "mysql01.ariadnasw.com",
+    "host": "localhost",
     "user": "root",
     "password": "aritel",
     "database": "sguard",
